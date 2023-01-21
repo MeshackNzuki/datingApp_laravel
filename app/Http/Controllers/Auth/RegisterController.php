@@ -22,9 +22,7 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
-
-    /**
+   /**
      * Where to redirect users after registration.
      *
      * @var string
@@ -40,7 +38,10 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
-
+    protected function index()
+    {
+        return view('pages/register');
+    }
     /**
      * Get a validator for an incoming registration request.
      *

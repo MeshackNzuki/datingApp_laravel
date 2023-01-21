@@ -18,10 +18,10 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'index'])->name('payment');
 Route::get('/onboard', [App\Http\Controllers\OnboardController::class, 'index'])->name('onboard');
 Route::get('/browse', [App\Http\Controllers\browseController::class, 'index'])->name('browse');
 Route::get('/terms', [App\Http\Controllers\TermsController::class, 'index'])->name('terms');
-Route::get('/activity', [App\Http\Controllers\ActiviyController::class, 'index'])->name('activity');
+Route::get('/activity', [App\Http\Controllers\ActivityController::class, 'index'])->name('activity');
+Route::get('/signup', [App\Http\Controllers\Auth\RegisterController::class, 'index'])->name('index');

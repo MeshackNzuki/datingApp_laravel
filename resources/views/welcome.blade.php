@@ -29,7 +29,10 @@
                 <div class="login-box">
                     <button type="button" class="login-btn btn btn-outline-info rounded-pill px-4 "
                         onclick="onLoginClick()">Log In</button>
+                        <button type="button" class="login-btn btn btn-outline-info rounded-pill px-4 "
+                        onclick="onLoginClick()">Register</button>
                 </div>
+        
 
 
             </div>
