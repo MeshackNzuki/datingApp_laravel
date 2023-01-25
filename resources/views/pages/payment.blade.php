@@ -25,7 +25,7 @@
               <div class="list-group">
                 <input
                   type="radio"
-                  name="RadioInputName"
+                  name="subscription"
                   value="Value1"
                   id="Radio1"
                 />
@@ -67,7 +67,8 @@
             </div>
 
             <div class="form-section">
-              <form>
+            <form method="POST" action="{{ route('transact') }}">
+                        @csrf
                 <div class="row">
                   <div class="mb-3">
                     <label for="InputNumber" class="form-label"

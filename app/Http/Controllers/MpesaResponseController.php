@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Customer\Mpesa;
-use Laravel\Sanctum\HasApiTokens;
+namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User_details\transaction;
 use Illuminate\Support\Facades\Log;
 
 

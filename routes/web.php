@@ -19,12 +19,19 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//payments
 Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'index'])->name('payment');
+//onboard
 Route::get('/onboard', [App\Http\Controllers\OnboardController::class, 'index'])->name('onboard');
+//browse
 Route::get('/browse', [App\Http\Controllers\BrowseController::class, 'index'])->name('browse');
+//terms
 Route::get('/terms', [App\Http\Controllers\TermsController::class, 'index'])->name('terms');
 //activities
 Route::get('/activity', [App\Http\Controllers\ActivityController::class, 'index'])->name('activity');
 //signup
 Route::get('/signup', [App\Http\Controllers\Auth\RegisterController::class, 'index'])->name('index');
 Route::post('signup_store', [App\Http\Controllers\Auth\RegisterController::class, 'store'])->name('signup_store');
+//mpesa
+Route::post('/transact',[App\Http\Controllers\MpesaController::class, 'transact'])->name('transact');
+Route::post('/transactionresponse',[MpesaResponse::class, 'response'])->name('transactionresponse');
