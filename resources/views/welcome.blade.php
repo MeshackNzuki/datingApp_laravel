@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Kenyanbabes is the only online dating app that matches you on what really matters to you. Find other singles are like you today!">
+        content="luckymate is the only online dating app that matches you on what really matters to you. Find other singles are like you today!">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,8 +29,8 @@
                 <div class="login-box">
                     <button type="button" class="login-btn btn btn-outline-info rounded-pill px-4 "
                         onclick="onLoginClick()">Log In</button>
-                        <button type="button" class="login-btn btn btn-outline-info rounded-pill px-4 "
-                        onclick="onLoginClick()">Register</button>
+                        <a href="/signup" type="button" class="login-btn btn btn-outline-info rounded-pill px-4 "
+                      >Register</a>
                 </div>
         
 
@@ -102,7 +102,7 @@
                             <div class="fs-2 fw-bold hero-title">Looking to find a friend with benefits?</div>
                             <div class="fs-6 text-secondary hero-description">
 							
-							<p>Looking to find friends with benefits? Kenyanbabes is all about that. We make it easier. All members on the site are looking to get laid. </p>
+							<p>Looking to find friends with benefits? luckymate is all about that. We make it easier. All members on the site are looking to get laid. </p>
 							<p>Stop stressing yourself with other dating sites if all you need is some steamy sessions. </p>
 							<p>Create a profile, chat, meet, get laid!</p>
 							
@@ -166,7 +166,7 @@
 						</div>
                     </div>
 					<div class="row why-us-top text-center m-3 p-3">
-                        <h4 class="fw-bold">KenyaBabes Is The Hottest Singles Site Around Right Now!</h4>
+                        <h4 class="fw-bold">luckymate Is The Hottest Singles Site Around Right Now!</h4>
                         <p>Our singles site might not be all about romance or love, but if you are looking for an encounter that is hot and exciting and that you will never forget then our site is exactly what you have been looking for. Your search for the ideal online dating service just ended the moment you set foot on our site.</p>
 						<div class="main-btn-box row px-5">
 							<a href = "index.html" role="button"
@@ -183,7 +183,7 @@
     <footer>
         <div class="container">
             <hr>
-            <div class="footer-content text-secondary ps-3 pb-3">&#169; Kenyanbabes.co.ke 2022 | All rights reserved.
+            <div class="footer-content text-secondary ps-3 pb-3">&#169; luckymate.co.ke 2022 | All rights reserved.
             </div>
         </div>
     </footer>

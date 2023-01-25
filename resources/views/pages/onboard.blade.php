@@ -6,7 +6,7 @@
     <main>
       <div class="container field-wrapper">
         <div class="field-1 field">
-          <h3>Welcome to <span class="sitename">Kenyanbabes</span></h3>
+          <h3>Welcome to <span class="sitename">luckymate</span></h3>
           <p>
             It looks like you're new here! I'm here to help make your experience
             the best it can be and help you find the perfect match for you. However you have to agree to the following before continuing.
@@ -154,7 +154,7 @@
       <div class="footer-onboard-wrapper">
         <div class="footer-onboard">
           <div class="footer-license">
-            © Kenyanbabes.co.ke 2022 | All rights reserved.
+            © luckymate.co.ke 2022 | All rights reserved.
           </div>
         </div>
       </div>

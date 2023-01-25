@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Dating') }}</title>
+    <title>The Best Dating Site in Kenya</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -28,7 +28,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                <div class="sitename fs-4 fw-bold">Kenyanbabes.co.ke</div>
+                <p class="sitename fs-4 fw-bold">luckymate.co.ke</p>
   </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -45,7 +45,7 @@
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                 <div class="login-box">
-                                    <a href role="button" class="login-btn btn btn-outline-info rounded-pill px-4">Sign Up</a>
+                                <a href role="button" class="login-btn btn btn-outline-info rounded-pill px-4 me-3 ">Login</a>
                                 </div>
                                 </li>
                             @endif
@@ -53,7 +53,8 @@
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                 <div class="login-box">
-                                    <a href role="button" class="login-btn btn btn-outline-info rounded-pill px-4 ">Login</a>
+                                <a href role="button" class="login-btn btn btn-outline-info rounded-pill px-4 ">Sign Up</a>
+                                   
                                 </div>
                                 </li>
                             @endif
@@ -87,9 +88,13 @@
     <footer>
         <div class="container">
             <hr>
-            <div class="footer-content text-secondary ps-3 pb-3">&#169; Kenyanbabes.co.ke {{date("Y")}} | All rights reserved.
+            <div class="footer-content text-secondary ps-3 pb-3">&#169; luckymate.co.ke {{date("Y")}} | All rights reserved.
             </div>
         </div>
     </footer>
 </body>
 </html>
+<script src="js/site.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>

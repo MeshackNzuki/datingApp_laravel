@@ -8,8 +8,10 @@
 
     <h4 class="text-secondary  text-center mt-5 fw-bold">GET LAID WHEN YOU</h4>
     <p class="text-center fw-bold fs-2" id="text-color">
-      <span class="text-dark">JOIN OUR</span> Kenyanbabes!
+      <span class="text-dark">JOIN</span> luckymate!
     </p>
+    <form method="POST" action="{{ route('signup_store') }}">
+    @csrf
     <div class="frame">
       <div class="row">
         <div class="col-lg-4 col-sm-8 col-8 col-md-6 mx-auto">
@@ -30,12 +32,17 @@
             </div>
 
             <!-- Select box -->
-            <select class="select-box mb-3 fs-6">
+            <select name="sex" class="select-box mb-3 fs-6" required autocomplete="sex">
               <option selected>Male seeking Female</option>
-			  <option value="3">Female seeking Male</option>
+			        <option value="3">Female seeking Male</option>
               <option value="1">Male seeking Male</option>              
               <option value="4">Female seeking Female</option>              
             </select>
+            @error('sex')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
             <div class="row px-4">
               <button type="button" class="next-btn btn btn-primary mt-4 px-5 py-2 rounded-pill"
                 onclick="onNext1Click()">NEXT</button>
@@ -55,7 +62,12 @@
             <div class="step-text text-center fw-bold py-2">Step 2: <span class="text-secondary fw-normal">What is your
                 age</span>
             </div>
-            <input type="number" placeholder="Age" class="select-box">
+            <input type="number" placeholder="Age" name="age" class="select-box" required autocomplete="age">
+            @error('age')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
             <div class="row px-4">
               <button type="button" class="next-btn btn btn-primary mt-4 px-5 py-2 rounded-pill"
                 onclick="onNext2Click()">NEXT</button>
@@ -76,7 +88,12 @@
               </span>
             </div>
             <label class="ms-4 py-2">Estate/Town/City</label>
-            <input type="text" placeholder="Start Typing" class="select-box">
+            <input type="text" placeholder="Start Typing" name="location" class="select-box" required autocomplete="location">
+            @error('location')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
             <div class="row px-4">
               <button type="button" class="next-btn btn btn-primary mt-4 px-5 py-2 rounded-pill"
                 onclick="onNext3Click()">NEXT</button>
@@ -97,7 +114,12 @@
                 Address</span>
             </div>
             <label class="ms-4 mb-1">My email adress is:</label>
-            <input type="email" placeholder="Email:" class="select-box">
+            <input type="email" placeholder="Email:" name="email" class="select-box" required autocomplete="email">
+            @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
             <div class="row px-4">
               <button type="button" class="next-btn btn btn-primary mt-4 px-5 py-2 rounded-pill"
                 onclick="onNext4Click()">NEXT</button>
@@ -116,22 +138,40 @@
 
 
             <!-- Step-1 -->
-            <div class="step-text text-center fw-bold py-2">Step 5: <span class="text-secondary fw-normal">Pick your
+            <div class="step-text text-center fw-bold py-2">Step 5: <span class="text-secondary fw-normal">Create your
                 username and password</span>
             </div>
-            <label class="ms-4 my-2">Username:</label>
-            <input type="text" placeholder="username" class="select-box mb-2">
+            <label class="ms-4 my-2">Your name:</label>
+            <input type="text" placeholder="name" name="name" value="{{ old('name') }}" class="select-box mb-2 @error('name') is-invalid @enderror" required autocomplete="name">
+
+            @error('username')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
             <label class="ms-4 my-2">Password:</label>
-            <input type="text" placeholder="password" class="select-box">
+            <input type="text" placeholder="password" name="password" class="select-box" required autocomplete="new-password">
+            @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <label class="ms-4 my-2">Confirm Password:</label>
+          <input type="text" placeholder="password confirmation" name="password_confirmation" class="select-box" required autocomplete="new-password">
+            @error('password_confirmation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
             <div class="row px-4">
-              <button type="button" class="next-btn btn btn-primary mt-4 px-5 py-2 rounded-pill"
-                onclick="onNext5Click()">FINALIZE ACCOUNT</button>
+              <button type="submit" class="next-btn btn btn-primary mt-4 px-5 py-2 rounded-pill"
+                >FINALIZE ACCOUNT</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-
+</form>
     <!-- Sign in -->
     <p class="text-center text-secondary m-4">Already a member?<a href="#" id="sign-anchor" onclick="onsigninClick()">
         Sign in</a></p>
@@ -189,7 +229,7 @@
       <div class="container-lg my-5">
         <!-- Heading Row -->
         <div class="row">
-          <h2 class="fw-bold text-center my-3">Kenyanbabes.co.ke Is The Hottest Singles Site Around Right Now!</h2>
+          <h2 class="fw-bold text-center my-3">luckymate.co.ke Is The Hottest Singles Site Around Right Now!</h2>
           <p class="text-secondary">Kenyababes is a singles site where finding someone to go on a date with has been
             made easier than you could
             ever ask it to be! Quite simply, for Kenyan men and women there is no better dating site around right now
@@ -200,7 +240,7 @@
 
           <p class="text-secondary">We are so confident that you will find the right person or people for you quite
             simply because our other
-            members regularly tell us just how much of a difference Kenyanbabes.co.ke has made to their dating lives. It
+            members regularly tell us just how much of a difference luckymate.co.ke has made to their dating lives. It
             has worked for them and we know that it will work for you as well. If you have never been a member of a
             singles site before then it will take you almost no time at all in getting used to how it all works because
             it really is far easier than you might expect. Just fill in your profile, start browsing through the many
@@ -209,5 +249,7 @@
         </div>
       </div>
     </section>
+    
+  
 
 @endsection
