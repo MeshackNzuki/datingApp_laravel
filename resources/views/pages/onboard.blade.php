@@ -5,7 +5,10 @@
     <!-- Main Content -->
     <main>
       <div class="container field-wrapper">
+      <form method="POST" action="{{ route('onboard_set_preferences') }}">
+                        @csrf
         <div class="field-1 field">
+      
           <h3>Welcome to <span class="sitename">luckymate</span></h3>
           <p>
             It looks like you're new here! I'm here to help make your experience
@@ -64,8 +67,8 @@
 		  <div class="text">My perfect match must have:</div>
 
           <div class="items">
-            <div class="item active">Intelligence</div>
-            <div class="item">Good Looks</div>
+            <input type=radio name="intelligent" class="item active">Intelligence</input>
+            <input type=radio name="goodlooks" class="item">Good Looks</input>
             <div class="item">Humor</div>
             <div class="item active">Great Bedroom Skills</div>
             <div class="item">Boldness</div>
@@ -145,9 +148,9 @@
         <div class="final-step field" style="display: none">
           <h3>Congratulations!</h3>
           <p>We have found perfect matches for you. Be prepared to see them and get laid, hopefully 😍</p>
-
           <div class="info">(You will be redirected in 2 seconds.)</div>
         </div>
+       </form>
       </div>
     </main>
     <!-- Footer -->

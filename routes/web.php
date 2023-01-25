@@ -23,6 +23,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'index'])->name('payment');
 //onboard
 Route::get('/onboard', [App\Http\Controllers\OnboardController::class, 'index'])->name('onboard');
+Route::get('/onboard_set_preferences', [App\Http\Controllers\OnboardController::class, 'index'])->name('onboard_set_preferences');
 //browse
 Route::get('/browse', [App\Http\Controllers\BrowseController::class, 'index'])->name('browse');
 //terms

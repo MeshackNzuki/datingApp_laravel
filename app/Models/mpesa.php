@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class mpesa extends Model
 {
     use HasFactory;
+    protected $fillable = [
+    
+       'user_id' ,
+       'transaction_id',
+       'amount',
+       'phone',
+       'details',
+
+    ];
 }

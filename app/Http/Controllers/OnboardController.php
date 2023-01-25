@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\onboard;
+use App\Models\preferences;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OnboardController extends Controller
 {
@@ -22,9 +23,28 @@ class OnboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(Request $request)
+    {   
+        $data = preferences::create([
+        'user_id' => Auth::id(),
+        'inteligence' => $request->intelligence,
+        'goodlooks' => $request->goodlooks,
+        'humor'=> $request->humor,
+        'bedroom_skills'=> $request->bedroom_skills,
+        'boldness'=> $request->boldness,
+        'money'=> $request->money,
+        'power'=> $request->power,
+        'flirtatiousness'=> $request->flirtatiousness,
+        'wit'=>$request->wit,
+        'endowment'=> $request->endowment,
+        'ass'=> $request->ass,
+        'petite'=> $request->petite,
+        'big_boobs'=> $request->big_boobs,
+        'age_bracket'=> $request->age_bracket,
+        'description' => $request->description,
+        'contact' => $request->contact,
+        ]);
+        $data->save();
     }
 
     /**
