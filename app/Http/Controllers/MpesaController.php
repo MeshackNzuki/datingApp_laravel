@@ -20,6 +20,7 @@ public function transact(Request $request){
     $access_token=json_decode($curl_response);
     $access_token=$access_token->access_token;
     $time_stamp=date("YmdHis");
+    //joined current time with  pass - important
     $password = base64_encode("4029613706964da1cb4da9190862dea0167416ff2ddda1ac239604d439b0061ba1a69a7". $time_stamp); 
     
     
@@ -32,7 +33,7 @@ public function transact(Request $request){
     "PartyA"=>"254".substr($request->phone, -9),   
     "PartyB"=>"4029613",          
     "PhoneNumber"=>"254".substr($request->phone, -9),
-    "CallBackURL"=>"https://e106-102-166-210-140.ngrok.io/api/transactionresponse",    
+    "CallBackURL"=>"https://e106-102-166-210-140.ngrok.io/api/transactionresponse", //used ngrok for localhost testing   
     "AccountReference"=>"",    
     "TransactionDesc"=>"Dating App"
                  );
