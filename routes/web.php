@@ -21,7 +21,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'index'])->name('payment');
 Route::get('/onboard', [App\Http\Controllers\OnboardController::class, 'index'])->name('onboard');
-Route::get('/browse', [App\Http\Controllers\browseController::class, 'index'])->name('browse');
+Route::get('/browse', [App\Http\Controllers\BrowseController::class, 'index'])->name('browse');
 Route::get('/terms', [App\Http\Controllers\TermsController::class, 'index'])->name('terms');
 //activities
 Route::get('/activity', [App\Http\Controllers\ActivityController::class, 'index'])->name('activity');

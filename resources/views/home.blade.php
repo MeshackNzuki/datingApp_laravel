@@ -21,23 +21,6 @@
             /></a>
           </div>
 
-          <div class="navlinks d-flex flex-row">
-            <div class="encounters fw-bold pt-2 mx-3 pe-auto">Browse</div>
-            <div class="activity fw-bold pt-2 mx-3 pe-auto">
-              Activity<span class="badge bg-badge mx-2">5</span>
-            </div>
-          </div>
-
-          <!-- Profile -->
-          <div class="profile" style="cursor: pointer">
-            <img
-              src="imgs/placeholder.png"
-              class="img-fluid rounded-circle"
-              style="height: 40px; width: 40px"
-              alt=""
-            />
-            logout
-          </div>
         </div>
       </div>
     </header>

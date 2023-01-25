@@ -20,24 +20,10 @@
                 width="196"
             /></a>
           </div>
-
-          <div class="navlinks d-flex flex-row">
-            <div class="encounters fw-bold pt-2 mx-3 pe-auto">Browse</div>
-            <div class="activity fw-bold pt-2 mx-3 pe-auto">
-              Activity<span class="badge bg-badge mx-2">5</span>
+          <div class="activity-top fw-bold fs-4 text-center my-3">
+              Activity
             </div>
-          </div>
-
-          <!-- Profile -->
-          <div class="profile" style="cursor: pointer">
-            <img
-              src="imgs/placeholder.png"
-              class="img-fluid rounded-circle"
-              style="height: 40px; width: 40px"
-              alt=""
-            />
-            logout
-          </div>
+          
         </div>
       </div>
     </header>
@@ -48,9 +34,7 @@
         <div class="container py-5">
           <!-- Activity and top -->
           <div class="row">
-            <div class="activity-top fw-bold fs-4 text-center my-3">
-              Activity
-            </div>
+           
             <div class="matches-toggle-box d-flex justify-content-center my-2">
               <a
                 href="#"

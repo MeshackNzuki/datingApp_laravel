@@ -946,3 +946,8 @@ body {
 .footer-content {
   font-size: 12px;
 }
+
+a{
+  color: black;
+  text-decoration: none;
+}

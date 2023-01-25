@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-	 <link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/main.css">
     <title>The Best Dating Site in Kenya</title>
     
 </head>
@@ -33,14 +33,13 @@
                       >Register</a>
                 </div>
         
-
-
             </div>
         </div>
         <!-- Sign in popup box -->
         <div class="container signinPopupBox py-5 position-fixed top-0 left-0 d-none">
             <div class="row">
                 <!-- Login Form -->
+                
                 <div class="signinPopup col-lg-4 col-8 col-sm-6 mx-auto pb-5 pt-4 rounded-4 position-relative">
                     <h4 class="text-center fw-bold mb-5">Log in</h2>
                         <div class="crossMark">
@@ -51,24 +50,57 @@
                             </svg>
                         </div>
                         <div class=" signin-content">
+                            <form method="POST" action="{{ route('login') }}">
+                            @csrf
+                    
+               
                             <div class="emailBox row px-4 py-2">
-                                <input type="email" placeholder="Email" class="text-center">
+                                <input id="email" type="email" class="@error('email') is-invalid @enderror text-center" placeholder="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
+                        
                             <div class="passwordBox row px-4 py-2">
-                                <input type="password" name="" id="" placeholder="Password" class="text-center">
+                                <input id="password" placeholder="Password" class="text-center" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
+                            <div class="row mb-3">
+                            <div class="col-md-6 offset-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                    <label class="form-check-label" for="remember">
+                                        {{ __('Remember Me') }}
+                                    </label>
+                                </div>
+                            </div>
+                           </div>
                             <div class="joinNow d-flex flex flex-direction-row justify-content-between px-3 py-2">
-                                <a href = "index.html" class="link-anchor text-center">Join free</a>
-                                <a href="#" class="link-anchor text-center" onclick="onforgotPasswordClick()">Forgot
-                                    Password?</a>
+                                <a href = "/onboard" class="link-anchor text-center">Join free</a>
+                            
+                                    @if (Route::has('password.request'))
+                                    <a class="link-anchor text-center" href="{{ route('password.request') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
+                                @endif
                             </div>
                             <div class="row px-4">
-                                <button type="button"
-                                    class="main-btn btn btn-primary mt-4 px-5 py-2 rounded-pill">LOGIN</button>
+                                <button  type="submit" 
+                                    class="main-btn btn btn-primary mt-4 px-5 py-2 rounded-pill"> {{ __('Login') }}</button>
                             </div>
+                            </form>
                         </div>
 
-                        <!-- Forgot Password -->
+                        <!-- Forgot Password 
                         <div class="forgotPasswordContent d-none">
                             <h6 class="text-secondary px-5 text-center pb-4">Enter your email address and we
                                 will send you further
@@ -82,6 +114,7 @@
                                     class="main-btn btn btn-primary mt-4 px-5 py-2 rounded-pill">RESET PASSWORD</button>
                             </div>
                         </div>
+                        -->
                 </div>
 
 
@@ -188,10 +221,7 @@
         </div>
     </footer>
 
-    <script src="js/site.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
+
 </body>
 
 </html>
