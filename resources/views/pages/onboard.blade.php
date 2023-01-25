@@ -45,6 +45,7 @@
             <div class="max-age-text">30</div>
             <i class="fa-solid fa-arrow-right" onclick="maxAgeIncrease()"></i>
           </div>
+          
 
           <a href="#" class="continue-button" onclick="onStep2Click()"
             >CONTINUE</a>
@@ -99,6 +100,7 @@
             cols="30"
             rows="10"
             maxlength="60"
+            name="description"
             placeholder="Max 60 characters."
           ></textarea>
 
@@ -124,7 +126,7 @@
           <div class="text">My contact (number/email/telegram link etc) is:</div>
 		  <p class = "small">Your contact info is only made visible to people you match. Otherwise it remains hidden.</p>
 
-          <input type="text" placeholder="contact info" />
+          <input type="text" name="contact" placeholder="contact info" />
 		  
 
           <a href="#" class="continue-button" onclick="onStep5Click()"
@@ -148,18 +150,7 @@
         </div>
       </div>
     </main>
-
     <!-- Footer -->
-    <footer>
-      <div class="footer-onboard-wrapper">
-        <div class="footer-onboard">
-          <div class="footer-license">
-            © luckymate.co.ke 2022 | All rights reserved.
-          </div>
-        </div>
-      </div>
-    </footer>
-
     <script src="js/onboard.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"

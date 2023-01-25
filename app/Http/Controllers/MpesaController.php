@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Models\mpesa;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 
@@ -46,8 +47,7 @@ public function transact(Request $request){
     curl_setopt($trans, CURLOPT_RETURNTRANSFER, true);
 
     $trans=json_decode(curl_exec($trans));
-
-    $id = auth()->user()->id;
+    $id = Auth::id();
         try {
             mpesa::create(['users_id'=>$id,'type'=>'Mpesa','merchantRequestID'=>$trans->MerchantRequestID,'status'=>'pending']); 
         } catch (Exception $e) {
