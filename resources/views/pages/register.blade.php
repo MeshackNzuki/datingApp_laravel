@@ -141,7 +141,7 @@
             <div class="step-text text-center fw-bold py-2">Step 5: <span class="text-secondary fw-normal">Create your
                 username and password</span>
             </div>
-            <label class="ms-4 my-2">Your name:</label>
+            <label class="ms-4 my-2">User name:</label>
             <input type="text" placeholder="name" name="name" value="{{ old('name') }}" class="select-box mb-2 @error('name') is-invalid @enderror" required autocomplete="name">
 
             @error('username')
@@ -150,14 +150,14 @@
                                     </span>
                                 @enderror
             <label class="ms-4 my-2">Password:</label>
-            <input type="text" placeholder="password" name="password" class="select-box" required autocomplete="new-password">
+            <input placeholder="password" type="Password" name="password" class="select-box" required autocomplete="new-password">
             @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                                 <label class="ms-4 my-2">Confirm Password:</label>
-          <input type="text" placeholder="password confirmation" name="password_confirmation" class="select-box" required autocomplete="new-password">
+          <input type="Password" placeholder="password confirmation" name="password_confirmation" class="select-box" required autocomplete="new-password">
             @error('password_confirmation')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

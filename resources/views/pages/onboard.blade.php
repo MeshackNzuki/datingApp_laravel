@@ -67,19 +67,19 @@
 		  <div class="text">My perfect match must have:</div>
 
           <div class="items">
-            <input type=radio name="intelligent" class="item active">Intelligence</input>
-            <input type=radio name="goodlooks" class="item">Good Looks</input>
-            <div class="item">Humor</div>
-            <div class="item active">Great Bedroom Skills</div>
-            <div class="item">Boldness</div>
-            <div class="item">Money</div>
-            <div class="item">Power</div>
-            <div class="item active">Flirtatiousness</div>
-            <div class="item">Wit</div>
-            <div class="item">Endowment</div>
-            <div class="item">Big Ass</div>
-            <div class="item">Slim</div>
-            <div class="item">Big Boobs</div>
+            <input type="checkbox" value="intelligent" name="intelligence" class="item active">Intelligence</input>
+            <input type="checkbox" name="goodlooks"  value="goodlooks"  class="item">Good Looks</input>
+            <input type="checkbox" name="humor" value="humor" class="item">Humor</input>
+            <input type="checkbox" name="bedroom_skills" value="bedroom_skills" class="item active">Great Bedroom Skills</input>
+            <input type="checkbox" name="boldness"  value="boldness" class="item">Boldness</input>
+            <input type="checkbox" name="money" value="money" class="item">Money</input>
+            <input type="checkbox" name="power"  value="power" class="item">Power</input>
+            <input type="checkbox" name="flirtatiousness"  value="flirtatiousness" class="item active">Flirtatiousness</input>
+            <input type="checkbox" name="wit" value="wit"  class="item">Wit</input>
+            <input type="checkbox" name="endowment" value="endowment" class="item">Endowment</input>
+            <input type="checkbox" name="ass" value="ass" class="item">Big Ass</input>
+            <input type="checkbox" name="petite" value="petite" class="item">Petite</input>
+            <input type="checkbox" name="big_boobs" value="big_boobs" class="item">Big Boobs</input>
           </div>
 
           <a href="#" class="continue-button" onclick="onStep3Click()"
@@ -132,8 +132,8 @@
           <input type="text" name="contact" placeholder="contact info" />
 		  
 
-          <a href="#" class="continue-button" onclick="onStep5Click()"
-            >CONTINUE</a
+          <button href="#" type="submit" class="continue-button" onclick="onStep5Click()"
+            >CONTINUE</button
           >
 
           <div class="steps">

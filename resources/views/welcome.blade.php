@@ -18,6 +18,19 @@
 </head>
 
 <body>
+       <!-- Preloader -->
+<div id="loader" class="d-block">
+<div class="container2">
+         <div class="preloader">
+            <span></span>
+            <span></span>
+            <span></span>
+         </div>
+         <div class="shadow_preloader"></div>
+      </div>
+
+</div>
+
     <!-- Header -->
     <header class="container">
         <div class="row">
@@ -65,7 +78,7 @@
                             </div>
                         
                             <div class="passwordBox row px-4 py-2">
-                                <input id="password" placeholder="Password" class="text-center" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" placeholder="Password" placeholder="Password" class="text-center" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -85,7 +98,7 @@
                             </div>
                            </div>
                             <div class="joinNow d-flex flex flex-direction-row justify-content-between px-3 py-2">
-                                <a href = "/onboard" class="link-anchor text-center">Join free</a>
+                                <a href = "/signup" class="link-anchor text-center">Join free</a>
                             
                                     @if (Route::has('password.request'))
                                     <a class="link-anchor text-center" href="{{ route('password.request') }}">
@@ -141,7 +154,7 @@
 							
                             </div>
                             <div class="main-btn-box row px-5">
-                                <a href = "index.html" role="button"
+                                <a href = "/signup" role="button"
                                     class="main-btn btn btn-primary mt-4 px-5 py-2 rounded-pill fw-bold">JOIN</a>
 
                             </div>
@@ -202,7 +215,7 @@
                         <h4 class="fw-bold">luckymate Is The Hottest Singles Site Around Right Now!</h4>
                         <p>Our singles site might not be all about romance or love, but if you are looking for an encounter that is hot and exciting and that you will never forget then our site is exactly what you have been looking for. Your search for the ideal online dating service just ended the moment you set foot on our site.</p>
 						<div class="main-btn-box row px-5">
-							<a href = "index.html" role="button"
+							<a href = "/signup" role="button"
 								class="main-btn btn btn-primary mt-4 py-3 rounded-pill fw-bold">CREATE
 								PROFILE</a>
 						</div>

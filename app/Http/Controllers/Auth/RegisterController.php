@@ -65,7 +65,7 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
     protected function store(Request $request)
-    {
+    {      
         return User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -74,6 +74,7 @@ class RegisterController extends Controller
             'age' => $request->age,
             'password' => Hash::make($request->password),
         ]);
+        return view("pages/payment");
     }
 }
  

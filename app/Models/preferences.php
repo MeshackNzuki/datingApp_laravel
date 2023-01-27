@@ -9,6 +9,7 @@ class preferences extends Model
 {
     use HasFactory;
    protected $fillable =[
+        'user_id',
         'intelligence',
         'goodlooks',
         'humor',
@@ -23,7 +24,5 @@ class preferences extends Model
         'petite',
         'big_boobs',
         'age_bracket',
-        'description',
-        'contact' 
    ];
 }

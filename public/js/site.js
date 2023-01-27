@@ -114,3 +114,15 @@ const onProfileClick = () => {
 
   console.log("Profile Clicked");
 };
+
+
+//code by meshkaka1@gmail.com
+
+//loader
+
+window.addEventListener("load", (event) => {
+let loader = document.getElementById('loader')
+loader.classList.add("d-none");
+
+
+});

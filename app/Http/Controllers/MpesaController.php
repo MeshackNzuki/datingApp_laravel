@@ -15,25 +15,28 @@ class MpesaController extends Controller
 public function transact(Request $request){
 
     $req = curl_init('https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials');
-    curl_setopt($req, CURLOPT_HTTPHEADER, ['Authorization: Basic ' . base64_encode('aWrsHLr8OiGyUlh2SjNVOalHxLOzAJGt:my1Ofjv8W34lyVQx')]);
+    curl_setopt($req, CURLOPT_HTTPHEADER, ['Authorization: Basic ' . base64_encode('yWIJoIsjeitetATbBtGNW05iGKLqWJGX:b6uAXc6R9Oa8lAjz')]);
     curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
     $curl_response = curl_exec($req);
     $access_token=json_decode($curl_response);
     $access_token=$access_token->access_token;
     $time_stamp=date("YmdHis");
     //joined current time with  pass - important
-    $password = base64_encode("4029613706964da1cb4da9190862dea0167416ff2ddda1ac239604d439b0061ba1a69a7". $time_stamp); 
+    $password = base64_encode("b4e27b17e83f36e7e5c7a59f49843b4927822ba9c21e000b4b5543ad017a51bd". $time_stamp); 
     
     
     $data = array(          
-    "BusinessShortCode"=>"4029613",    
+    "BusinessShortCode"=>"4089491",    
     "Password"=>$password,    
     "Timestamp"=>$time_stamp,
     "TransactionType"=> "CustomerPayBillOnline",    
-    "Amount"=>$request->amount,    
-    "PartyA"=>"254".substr($request->phone, -9),   
-    "PartyB"=>"4029613",          
-    "PhoneNumber"=>"254".substr($request->phone, -9),
+    //"Amount"=>$request->amount,  
+    "Amount"=>"500",  
+    //"PartyA"=>"254".substr($request->phone, -9),   
+    "PartyA"=>"254703440095",
+    "PartyB"=>"4089491",          
+    //"PhoneNumber"=>"254".substr($request->phone, -9),
+    "PhoneNumber"=>"254703440095",
     "CallBackURL"=>"https://e106-102-166-210-140.ngrok.io/api/transactionresponse", //used ngrok for localhost testing   
     "AccountReference"=>"",    
     "TransactionDesc"=>"Dating App"

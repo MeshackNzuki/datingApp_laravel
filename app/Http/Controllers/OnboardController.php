@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\preferences;
+use App\Models\profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OnboardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,9 +30,10 @@ class OnboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
-    {   
-        $data = preferences::create([
-        'user_id' => Auth::id(),
+    {  
+
+        $data = preferences::create([                    
+        'user_id' => $request->user()->id,
         'inteligence' => $request->intelligence,
         'goodlooks' => $request->goodlooks,
         'humor'=> $request->humor,
@@ -41,10 +48,16 @@ class OnboardController extends Controller
         'petite'=> $request->petite,
         'big_boobs'=> $request->big_boobs,
         'age_bracket'=> $request->age_bracket,
-        'description' => $request->description,
-        'contact' => $request->contact,
         ]);
         $data->save();
+        $data2 = profile::create([
+            'user_id' => $request->user()->id,
+            'description' => $request->description,
+            'contacts' => $request->contact,
+            ]);
+         $data2->save();
+
+         return view('/pages/browse');
     }
 
     /**
