@@ -11,9 +11,11 @@ class mpesa extends Model
     protected $fillable = [
     
        'user_id' ,
-       'transaction_id',
+       'transactionID',
+       'merchantRequestID',
        'amount',
        'phone',
+       'status',
        'details',
 
     ];

@@ -19,9 +19,11 @@ return new class extends Migration
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->string('transaction_id')->nullable();
+            $table->string('transactionID')->nullable();
+            $table->string('merchantRequestID')->nullable();   
             $table->string('amount')->nullable();
             $table->string('phone')->nullable();
+            $table->string('status')->nullable();
             $table->string('details')->nullable();
             $table->timestamps();
         });

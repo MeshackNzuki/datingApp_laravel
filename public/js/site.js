@@ -123,6 +123,130 @@ const onProfileClick = () => {
 window.addEventListener("load", (event) => {
 let loader = document.getElementById('loader')
 loader.classList.add("d-none");
+});
 
+//register form validation
+
+$(document).ready(function () {
+
+
+
+  $("#signup-form").validate({
+    highlight: function(element, errorClass, validClass) {
+      $(element).addClass(errorClass).removeClass(validClass);
+      $(element.form).find("label[for=" + element.id + "]")
+      .addClass(errorClass);
+    },
+    unhighlight: function(element, errorClass, validClass) {
+      $(element).removeClass(errorClass).addClass(validClass);
+      $(element.form).find("label[for=" + element.id + "]")
+      .removeClass(errorClass);
+    },
+
+    rules: {     
+      name: "required",
+   
+      email: {
+        required: true,
+        email: true
+      },
+      jpassword:{
+        required: true,
+        minlength:2
+      },
+      password_confirmation:{
+        required: true,
+        equalTo:'#password'
+      },
+      sex:{
+        required: true,
+      },
+      age:{
+        required: true,
+      },
+      location:{
+        required: true,
+      },
+
+    },
+    messages: {
+      name: "Please specify your name",
+      email: {
+        required: "We need your email address to contact you",
+        email: "Your email address must be in the format of name@domain.com"
+      },
+        password: {
+        required: " Please enter a password",
+        minlength: "Pasword length must be greater than 2"
+      },
+     password_confirmation: {
+        required: "We need your email address to contact you",
+        equalTo: "Your Passwords dont match"
+      },
+      age: {
+        required: "We need your email address to contact you",
+        email: "Your email address must be in the format of name@domain.com"
+      },  
+       jsex: {
+        required: "Please tell us what you are looking for in step 1",
+      
+      },
+      location: {
+        required: "Please Give your location for easy hookup",
+        
+      }
+    }
+,
+    
+   
+    highlight: function(element) {
+      $(element).parent().addClass('has-error');
+    },
+    unhighlight: function(element) {
+      $(element).parent().removeClass('has-error');
+    },
+    errorElement: 'span',
+    errorClass: 'validation-error-message help-block form-helper bold',
+    errorPlacement: function(error, element) {
+      if (element.parent('.input-group').length) {
+        error.insertAfter(element.parent());
+      } else {
+        error.insertAfter(element);
+      }}
+
+
+
+
+
+  });
+
+  $("#signup-form").on('submit', function(e) {
+    var isvalid = $("#signup-form").valid();
+
+  
+    if($('#age').val() < 17)
+    {
+      e.preventDefault();
+      alert("We don't recomment underage individuals (Below 18 Yrs)");
+      window.location.reload();
+   }
+
+    
 
 });
+
+
+  
+})
+
+
+function validate(e) {
+  e.preventDefault();
+  
+// Storing Field Values In Variables
+var monthly = document.getElementById("monthly").value;
+var weekly = document.getElementById("weekly").value;
+var phone = document.getElementById("phone").value;
+console.log('executed')
+alert(phone)
+}

@@ -1,38 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\media;
 
 class ProfileController extends Controller
-{
-   
+{  
 
-public function store(Request $request){
+public function profile_pic(Request $request){
+    $avatarName = time().'R'.Str::random(6).'.'.$request->avatar->getClientOriginalExtension();
+    $request->avatar->move(public_path('avatars'), $avatarName);   
 
-    $user_id = $request->user()->id;
+     
+    Auth()->user()->update(['avatar' => $avatarName]);
 
-    $file = $request->file('file');
-    $name = $file->hashName(); 
-    if (Media::where('name', $name)->exists()) {
-        $name = $file->hashName(); 
+        return back()->with('success', 'Avatar updated successfully.');
     }
-    Media::create(
-        [
-        'user_id'=> $user_id,                  
-        'name' => "{$name}",
-        'file_name' => $file->getClientOriginalName(),
-        'mime_type' => $file->getClientMimeType(),
-        'path' => "orderFiles/{$name}",
-        'collection' => $request->get('collection'),
-        'size' => $file->getSize(),
-        ],
-);      
-
-    Storage::disk('local')->put('orderFiles/'.$file->hashName(),$file);                
-
-
-return response()->json('order success');
-}
 
 }

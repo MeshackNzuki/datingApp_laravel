@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\browse;
+use App\Models\User;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class BrowseController extends Controller
 {
@@ -17,8 +20,12 @@ class BrowseController extends Controller
         $this->middleware('auth');
     }
     public function index()
-    {
-        return view('/pages/browse');
+    { 
+  
+        return view('/pages/browse', [
+            'users' =>User::paginate(10)            
+    ]);
+
     }
 
     /**

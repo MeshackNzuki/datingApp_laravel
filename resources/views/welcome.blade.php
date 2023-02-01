@@ -37,7 +37,7 @@
             <div class="col-8 d-flex justify-content-between mx-auto py-3">
                 <!-- Site Name -->
                 <div class="sitename fs-4 fw-bold">
-					<a href = "index.html"><img src="imgs/logo.png" alt="kenyan babes logo" class = "img-fluid" height = "60" width = "196"></a>
+					<a href = "index.html"><img src="imgs/logo.png" alt="lucky mate logo" class = "img-fluid" height = "60" width = "196"></a>
 				</div>
                 <div class="login-box">
                     <button type="button" class="login-btn btn btn-outline-info rounded-pill px-4 "

@@ -10,7 +10,7 @@
     <p class="text-center fw-bold fs-2" id="text-color">
       <span class="text-dark">JOIN</span> luckymate!
     </p>
-    <form method="POST" action="{{ route('signup_store') }}">
+    <form method="POST" action="{{ route('signup_store') }} " id="signup-form">
     @csrf
     <div class="frame">
       <div class="row">
@@ -32,7 +32,7 @@
             </div>
 
             <!-- Select box -->
-            <select name="sex" class="select-box mb-3 fs-6" required autocomplete="sex">
+            <select id="sex" name="sex"  class="select-box mb-3 fs-6" required  autocomplete="sex">
               <option selected>Male seeking Female</option>
 			        <option value="3">Female seeking Male</option>
               <option value="1">Male seeking Male</option>              
@@ -62,7 +62,7 @@
             <div class="step-text text-center fw-bold py-2">Step 2: <span class="text-secondary fw-normal">What is your
                 age</span>
             </div>
-            <input type="number" placeholder="Age" name="age" class="select-box" required autocomplete="age">
+            <input id="age" type="number" placeholder="Age" name="age" class="select-box" required  autocomplete="age">
             @error('age')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -87,13 +87,12 @@
             <div class="step-text text-center fw-bold py-2">Step 3: <span class="text-secondary fw-normal">Where are you
               </span>
             </div>
-            <label class="ms-4 py-2">Estate/Town/City</label>
-            <input type="text" placeholder="Start Typing" name="location" class="select-box" required autocomplete="location">
-            @error('location')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+            <!-- Autocomplete location search input --> 
+              <label class="ms-4 py-2">Estate/Town/City</label>
+              <input type="text" id="search_input" class="select-box"  id="location" name="location" placeholder="Type address..." />
+                <input type="hidden" id="loc_lat" />
+                <input type="hidden" id="loc_long" />
+           
             <div class="row px-4">
               <button type="button" class="next-btn btn btn-primary mt-4 px-5 py-2 rounded-pill"
                 onclick="onNext3Click()">NEXT</button>
@@ -113,13 +112,12 @@
             <div class="step-text text-center fw-bold py-2">Step 4: <span class="text-secondary fw-normal">Email
                 Address</span>
             </div>
+
+
+           
             <label class="ms-4 mb-1">My email adress is:</label>
-            <input type="email" placeholder="Email:" name="email" class="select-box" required autocomplete="email">
-            @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+            <input id="email" type="email"  placeholder="Email:" name="email" class="select-box form-control input-w" required  autocomplete="email">
+            <label for='email'></label>
             <div class="row px-4">
               <button type="button" class="next-btn btn btn-primary mt-4 px-5 py-2 rounded-pill"
                 onclick="onNext4Click()">NEXT</button>
@@ -142,7 +140,7 @@
                 username and password</span>
             </div>
             <label class="ms-4 my-2">User name:</label>
-            <input type="text" placeholder="name" name="name" value="{{ old('name') }}" class="select-box mb-2 @error('name') is-invalid @enderror" required autocomplete="name">
+            <input id="name" type="text" placeholder="name" name="name" value="{{ old('name') }}" class="select-box mb-2 form-control input-w" required  autocomplete="name">
 
             @error('username')
                                     <span class="invalid-feedback" role="alert">
@@ -150,19 +148,16 @@
                                     </span>
                                 @enderror
             <label class="ms-4 my-2">Password:</label>
-            <input placeholder="password" type="Password" name="password" class="select-box" required autocomplete="new-password">
-            @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+            <input id="password" placeholder="password" type="Password" name="password" class="select-box" required  autocomplete="new-password">
+
+                <span class="error" role="alert">
+                </span>
+                               
                                 <label class="ms-4 my-2">Confirm Password:</label>
-          <input type="Password" placeholder="password confirmation" name="password_confirmation" class="select-box" required autocomplete="new-password">
-            @error('password_confirmation')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+          <input id="password_confirmation" type="Password" placeholder="password confirmation" name="password_confirmation" class="select-box" required  autocomplete="new-password">
+          <span class="text-danger" role="alert">
+                               
+          </span>
             <div class="row px-4">
               <button type="submit" class="next-btn btn btn-primary mt-4 px-5 py-2 rounded-pill"
                 >FINALIZE ACCOUNT</button>
@@ -249,7 +244,44 @@
         </div>
       </div>
     </section>
-    
-  
 
+ <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=datingapp&key=AIzaSyAcUA3BsiMTEW3safCIqH5JHMEN1jMT17Y"></script>
+
+
+<script>
+
+var searchInput = 'search_input';
+
+$(document).ready(function () {
+    var autocomplete;
+    autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
+        types: ['geocode'],
+    });
+	
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var near_place = autocomplete.getPlace();
+        document.getElementById('loc_lat').value = near_place.geometry.location.lat();
+        document.getElementById('loc_long').value = near_place.geometry.location.lng();
+		
+        document.getElementById('latitude_view').innerHTML = near_place.geometry.location.lat();
+        document.getElementById('longitude_view').innerHTML = near_place.geometry.location.lng();
+    });
+});
+
+$(document).on('change', '#'+searchInput, function () {
+    document.getElementById('latitude_input').value = '';
+    document.getElementById('longitude_input').value = '';
+	
+    document.getElementById('latitude_view').innerHTML = '';
+    document.getElementById('longitude_view').innerHTML = '';
+});
+
+var autocomplete;
+autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
+    types: ['geocode'],
+    componentRestrictions: {
+        country: "USA"
+    }
+});
+</script>
 @endsection

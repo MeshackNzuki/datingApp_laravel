@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\subscription;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class RegisterController extends Controller
 {
@@ -66,14 +69,31 @@ class RegisterController extends Controller
      */
     protected function store(Request $request)
     {      
-        return User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'location' => $request->location,
-            'sex' => $request->sex,
-            'age' => $request->age,
-            'password' => Hash::make($request->password),
-        ]);
+
+        try {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'location' => $request->location,
+                'sex' => $request->sex,
+                'age' => $request->age,
+                'password' => Hash::make($request->password),
+            ]);
+        } catch (\Throwable $th) {
+            Alert::error('', 'Could Not Create Account');
+            return  redirect('/signup');
+        }
+        
+       
+
+        auth()->login($user);
+
+        subscription::create(["user_id"=>auth()->user()->id,"status"=>"inactive"]);
+
+        Alert::success('', 'your account has been set up, Welcome');
+
+
+
         return view("pages/payment");
     }
 }

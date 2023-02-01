@@ -17,12 +17,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');         
             $table->string('name');
-            $table->string('file_name');
-            $table->string('mime_type');
-            $table->string('path');
+            $table->string('file_name')->nullable(); ;
+            $table->string('mime_type')->nullable(); ;
+            $table->string('path')->nullable(); ;
             $table->string('disk')->default('local');
             $table->string('collection')->nullable();         
-            $table->unsignedBigInteger('size');         
+            $table->unsignedBigInteger('size')->nullable();         
             $table->timestamps();
         });
     }

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PaymentController extends Controller
+
 {
     /**
      * Display a listing of the resource.

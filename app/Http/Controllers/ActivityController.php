@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\activity;
+use App\Models\requests;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ActivityController extends Controller
@@ -16,11 +17,6 @@ class ActivityController extends Controller
     {
         $this->middleware('auth');
     } 
-
-    public function index()
-    {
-        return view('/pages/activity');
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -49,9 +45,25 @@ class ActivityController extends Controller
      * @param  \App\Models\activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function show(activity $activity)
-    {
-        //
+    public function index(Request $request)
+    {       
+         try {
+           // $from_id = requests::where('to_user_id',$request->user()->id)->get('from_user_id');
+             $users = $request->user()->friends;
+            // dd($users);
+             $matches  = $request->user()->pendingFriends;                 
+             return view('/pages/activity', [
+             'users' =>  $users,
+             'matches' => $matches             
+        ]);
+    
+         } catch (\Throwable $th) {
+            return view('/pages/activity', [
+            'users' =>null,
+            'matches' => null               
+        ]);
+    
+         }  
     }
 
     /**
@@ -88,3 +100,20 @@ class ActivityController extends Controller
         //
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

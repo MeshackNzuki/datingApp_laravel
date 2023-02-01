@@ -57,7 +57,7 @@ class OnboardController extends Controller
             ]);
          $data2->save();
 
-         return view('/pages/browse');
+         return redirect('/browse');
     }
 
     /**

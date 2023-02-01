@@ -22,14 +22,16 @@
 
             <div class="subscription-section">
               <h1>Select Your Subscription:</h1>
+              <form method="POST" action="{{ route('transact') }}" onsubmit="validate()">
+                        @csrf   
               <div class="list-group">
                 <input
                   type="radio"
-                  name="subscription"
-                  value="Value1"
-                  id="Radio1"
+                  name="amount"
+                  value="500"
+                  id="monthly"
                 />
-                <label class="list-group-item" for="Radio1">
+                <label class="list-group-item" for="monthly">
                   <strong> 7 Days Access - 30% off </strong>
                   <p class="mx-4">
                     Browse profiles of hot singles unlimited for 7 days
@@ -41,12 +43,12 @@
                 </label>
                 <input
                   type="radio"
-                  name="RadioInputName"
-                  value="Value2"
-                  id="Radio2"
+                 name="amount"
+                  value="500"
+                  id="weekly"
                 />
 
-                <label class="list-group-item" for="Radio2">
+                <label class="list-group-item" for="weekly">
                   <strong> 1 Month - 30% off </strong>
                   <p class="mx-4">
                     Browse profiles of hot singles unlimited for 7 days
@@ -67,8 +69,7 @@
             </div>
 
             <div class="form-section">
-            <form method="POST" action="{{ route('transact') }}">
-                        @csrf
+          
                 <div class="row">
                   <div class="mb-3">
                     <label for="InputNumber" class="form-label"
@@ -76,6 +77,7 @@
                     >
                     <input
                       type="number"
+                      name="phone"
                       class="form-control"
                       id="InputNumber1"
                       placeholder="e.g 0700 123 456"
@@ -84,7 +86,7 @@
                 </div>
 
                 <div class="row main-btn-wrapper">
-                  <button type="submit" class="main-btn btn btn-primary">
+                  <button type="submit" onclick="validate()" class="main-btn btn btn-primary">
                     Pay Now
                   </button>
                 </div>
@@ -93,5 +95,13 @@
           </div>
         </div>
       </div>
+      
+<script>
+
+
+
+</script>
     </div>
+
+
 @endsection
