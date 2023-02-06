@@ -15,8 +15,7 @@
                                 {{ session('error') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-
-       
+      
 
 
          @endif
@@ -44,7 +43,7 @@
       
                   <strong> {{ $user->name }}
                   @if($user->isOnline())             
-                  <small class="fa fa-circle text-"></small>
+                  <small class="fa fa-circle text-success"></small>
                   @else
                   <small>...</small>   
                   @endif
@@ -57,28 +56,29 @@
 
                 </div>
 
-                <div class="col col-2 text-right"> joined
+                <div class="col col-2 text-right"> Joined
                 {{ date('M , Y', strtotime($user->created_at)) }} <br />
 
                       
-                  <form method="POST" action="{{ route('request-hookup',$user->id) }}">
-  
+                  <form method="POST" action="{{route('request-hookup',$user->id) }}"> 
                         @csrf
-                        <button class = "btn btn-sm btn-outline-primary">Request contact info</button>
+                        <button type="submit" class = "btn btn-sm btn-outline-primary">Request contact info</button>
                  </form>
                 </div>
 
               </div>
             </label>
            @endforeach
-          </div>
-          <div class="row btn-next-wrapper">
-            <div class="col">
+          </div> 
+            @if($users->count() > 10)
+            <div class="row btn-next-wrapper">
+            <div class="col">             
               <button type="submit" class="btn btn-next">
                 Load More <img src="./imgs/icon-next.png" alt="" />
               </button>
+               </div>
             </div>
-          </div>
+            @endif
         </div>
       </div>
     </div>

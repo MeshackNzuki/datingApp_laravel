@@ -66,7 +66,7 @@
                         <div class="navlinks d-flex flex-row">
                             <a href="/browse" class="encounters fw-bold pt-2 mx-3 pe-auto">Browse</a>
                             <a href="/activity" class="activity fw-bold pt-2 mx-3 pe-auto">
-                            Activity<span class="badge bg-badge mx-2">
+                            Activity<span class="badge bg-danger mx-2">
                                     {{   Auth::user()->friends->count() +
                                         Auth::user()->pendingFriendsTo->count()}}
                             </span>

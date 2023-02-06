@@ -1,9 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
   <body>
-
-
     <!-- Main Content -->
     <main>
       <div class="main-activity-wrapper">
@@ -89,7 +86,7 @@
                     
                   <form method="POST" id="form1" action="{{ route('accept-hookup',$user->id) }}">               
                           @csrf
-                          <button class = "btn btn-sm btn-outline-primary me-1">                                    
+                          <button type="submit" class ="btn btn-sm btn-outline-primary me-1">                                    
                         Accept
                         </button>
                    <form>
@@ -98,7 +95,7 @@
 
                   <form method="POST" id="form2" action="{{ route('decline-hookup',$user->id) }}">               
                   @csrf
-                  <button class = "btn btn-sm btn-outline-danger">Decline</button>
+                  <button type="submit" class = "btn btn-sm btn-outline-danger">Decline</button>
                   </form>
                   </div>
 
@@ -123,13 +120,16 @@
             </div>
             @endif
           </div>
-          <div class="row btn-next-wrapper">
+          @if($users->count() > 10)
+            <div class="row btn-next-wrapper">
             <div class="col">
+             
               <button type="submit" class="btn btn-next">
                 Load More <img src="./imgs/icon-next.png" alt="" />
               </button>
+               </div>
             </div>
-          </div>
+            @endif
         </div>
       </div>
     </div>
@@ -257,13 +257,16 @@
             </div>
             @endif
           </div>
-          <div class="row btn-next-wrapper">
+          @if($matches->count() > 10)
+            <div class="row btn-next-wrapper">
             <div class="col">
+             
               <button type="submit" class="btn btn-next">
                 Load More <img src="./imgs/icon-next.png" alt="" />
               </button>
+               </div>
             </div>
-          </div>
+            @endif
         </div>
       </div>
     </div>
