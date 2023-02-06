@@ -47,7 +47,8 @@ class OnboardController extends Controller
         'ass'=> $request->ass,
         'petite'=> $request->petite,
         'big_boobs'=> $request->big_boobs,
-        'age_bracket'=> $request->age_bracket,
+        'min-age'=> $request->max_age,
+        'max-age'=> $request->min_age,
         ]);
         $data->save();
         $data2 = profile::create([
@@ -57,7 +58,7 @@ class OnboardController extends Controller
             ]);
          $data2->save();
 
-         return redirect('/browse');
+         return redirect('/payment');
     }
 
     /**

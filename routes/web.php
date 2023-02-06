@@ -12,17 +12,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('welcome');
-});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-//payments
-Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'index'])->name('payment');
-//onboard
-Route::get('/onboard', [App\Http\Controllers\OnboardController::class, 'index'])->name('onboard');
-Route::post('/onboard_set_preferences', [App\Http\Controllers\OnboardController::class, 'create'])->name('onboard_set_preferences');
+
 //browse
 
 //terms
@@ -34,30 +27,37 @@ Route::get('/login-view', [App\Http\Controllers\Auth\LoginController::class, 'lo
 
 Route::post('signup_store', [App\Http\Controllers\Auth\RegisterController::class, 'store'])->name('signup_store');
 
-//mpesa
+//mpesa opn
 Route::post('/transact',[App\Http\Controllers\Mpesa\MpesaController::class, 'transact'])->name('transact');
-Route::post('/transactionresponse',[App\Http\Controllers\Mpesa\MpesaResponseController::class, 'response'])->name('transactionresponse');
-Route::get('/registerUrl',[App\Http\Controllers\Mpesa\MpesaRegisterUrlController::class, 'index'])->name('registerUrl');
-Route::get('/confirmationUrl',[App\Http\Controllers\Mpesa\MpesaConfirmationController::class, 'index'])->name('confirmationUrl');
-Route::get('/validationUrl',[App\Http\Controllers\Mpesa\MpesaValidationController::class, 'index'])->name('validationUrl');
+//the rest are on the api for better exposure
+Route::get('/' ,function(){
+    return view('welcome');
+});
 
+Route::middleware(['auth'])->group(function () {
+//payments
+Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'index'])->name('payment');
+//waiting
+Route::get('/processing' ,function(){
+    return view('/pages/waiting');
+});
 
+//onboard
+Route::get('/onboard', [App\Http\Controllers\OnboardController::class, 'index'])->name('onboard');
+Route::post('/onboard_set_preferences', [App\Http\Controllers\OnboardController::class, 'create'])->name('onboard_set_preferences'); 
+    
 //Requests  - hookup
 Route::post('request-hookup/{id}',[App\Http\Controllers\HookController::class, 'request_hookup'])->name('request-hookup');
 Route::post('requests',[App\Http\Controllers\HookController::class, 'show'])->name('requests');
 Route::post('accept-hookup/{id}',[App\Http\Controllers\HookController::class, 'accept_hookup'])->name('accept-hookup');
 Route::post('decline-hookup/{id}',[App\Http\Controllers\HookController::class, 'decline_hookup'])->name('decline-hookup');
-Route::post('decline-hookup/{id}',[App\Http\Controllers\HookController::class, 'decline_hookup'])->name('decline-hookup');
-
-//settings
+    //settings
 Route::get('/settings',[App\Http\Controllers\SettingsController::class, 'index'])->name('settings');
-
 //profile pic
 Route::post('/profile_pic',[App\Http\Controllers\ProfileController::class, 'profile_pic'])->name('profile_pic');
-
+});
 //for subscribed users
-Route::middleware(['subscription', 'auth'])->group(function () {
-
+Route::middleware(['auth','onboarded','subscription'])->group(function () {
     //activities
     Route::get('/activity', [App\Http\Controllers\ActivityController::class, 'index'])->name('activity');
     //browse

@@ -4,6 +4,18 @@
     <div class="payment-page-wrapper">
       <div class="container payment-page">
         <div class="row">
+        @if (session('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+         @endif
+         @if (session('error'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ session('error') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+         @endif
           <div class="card col-8">
             <div class="header-section">
               <div class="row">
@@ -25,7 +37,7 @@
               <form method="POST" action="{{ route('transact') }}" onsubmit="validate()">
                         @csrf   
               <div class="list-group">
-                <input
+                <input                
                   type="radio"
                   name="amount"
                   value="500"
@@ -42,16 +54,17 @@
                   </div>
                 </label>
                 <input
+                checked
                   type="radio"
                  name="amount"
                   value="500"
                   id="weekly"
                 />
 
-                <label class="list-group-item" for="weekly">
+                <label class="list-group-item"   active for="weekly">
                   <strong> 1 Month - 30% off </strong>
                   <p class="mx-4">
-                    Browse profiles of hot singles unlimited for 7 days
+                    Browse profiles of hot singles unlimited for One month
                   </p>
                   <div class="best-value text-center">best value!</div>
                   <div class="select-price">
@@ -60,6 +73,8 @@
                   </div>
                 </label>
                 <input
+                
+                
                   type="radio"
                   name="RadioInputName"
                   value="Value3"
@@ -76,17 +91,18 @@
                       >Mpesa Number</label
                     >
                     <input
-                      type="number"
+                      type="phone"
                       name="phone"
                       class="form-control"
                       id="InputNumber1"
                       placeholder="e.g 0700 123 456"
+                      required
                     />
                   </div>
                 </div>
 
                 <div class="row main-btn-wrapper">
-                  <button type="submit" onclick="validate()" class="main-btn btn btn-primary">
+                  <button onclick="validate()"class="main-btn btn btn-primary">
                     Pay Now
                   </button>
                 </div>
@@ -95,13 +111,15 @@
           </div>
         </div>
       </div>
-      
-<script>
-
-
-
-</script>
     </div>
-
+    <script src="js/payment.js"></script>
+    <script type="text/javascript">
+        $("form").on("submit", function (e) {
+            e.preventDefault();
+        });
+    </script>
 
 @endsection
+
+
+

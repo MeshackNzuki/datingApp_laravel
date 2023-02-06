@@ -2,10 +2,6 @@
 
 @section('content')
   <div class="container fluid">
-    <header>
-      <h2 class="text-center fw-bold m-3" id="text-color"><a href = "index.html"><img src="imgs/logo.png" alt="kenyan babes logo" class = "img-fluid" height = "60" width = "196"></a></h2>
-    </header>
-
     <h4 class="text-secondary  text-center mt-5 fw-bold">GET LAID WHEN YOU</h4>
     <p class="text-center fw-bold fs-2" id="text-color">
       <span class="text-dark">JOIN</span> luckymate!
@@ -33,16 +29,16 @@
 
             <!-- Select box -->
             <select id="sex" name="sex"  class="select-box mb-3 fs-6" required  autocomplete="sex">
-              <option selected>Male seeking Female</option>
-			        <option value="3">Female seeking Male</option>
-              <option value="1">Male seeking Male</option>              
+              <option value="1" selected>Male seeking Female</option>
+			        <option value="2">Female seeking Male</option>
+              <option value="3">Male seeking Male</option>              
               <option value="4">Female seeking Female</option>              
             </select>
-            @error('sex')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+
+            <span id="sexcheck" class="sexcheck_null d-none"role="alert">
+                   <p class="text-danger">** This field is required</p>                     
+            </span>
+
             <div class="row px-4">
               <button type="button" class="next-btn btn btn-primary mt-4 px-5 py-2 rounded-pill"
                 onclick="onNext1Click()">NEXT</button>
@@ -63,11 +59,13 @@
                 age</span>
             </div>
             <input id="age" type="number" placeholder="Age" name="age" class="select-box" required  autocomplete="age">
-            @error('age')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+         
+            <span id="agecheck" class="agecheck d-none"role="alert">
+                   <p class="text-danger">**Sorry, but you are under age</p>                     
+            </span>
+            <span id="agecheck" class="agecheck_null d-none"role="alert">
+                   <p class="text-danger">** This field is required</p>                     
+            </span>
             <div class="row px-4">
               <button type="button" class="next-btn btn btn-primary mt-4 px-5 py-2 rounded-pill"
                 onclick="onNext2Click()">NEXT</button>
@@ -87,12 +85,15 @@
             <div class="step-text text-center fw-bold py-2">Step 3: <span class="text-secondary fw-normal">Where are you
               </span>
             </div>
-            <!-- Autocomplete location search input --> 
+
+    <!-- Autocomplete location search input -->
               <label class="ms-4 py-2">Estate/Town/City</label>
-              <input type="text" id="search_input" class="select-box"  id="location" name="location" placeholder="Type address..." />
+              <input type="text" id="search_input" class="select-box" id="location" name="location" placeholder="Type address..." />
                 <input type="hidden" id="loc_lat" />
                 <input type="hidden" id="loc_long" />
-           
+                <span id="locationcheck" class="locationcheck_null d-none"role="alert">
+                   <p class="text-danger">** This field is required</p>                     
+            </span>    
             <div class="row px-4">
               <button type="button" class="next-btn btn btn-primary mt-4 px-5 py-2 rounded-pill"
                 onclick="onNext3Click()">NEXT</button>
@@ -116,8 +117,14 @@
 
            
             <label class="ms-4 mb-1">My email adress is:</label>
-            <input id="email" type="email"  placeholder="Email:" name="email" class="select-box form-control input-w" required  autocomplete="email">
+            <input id="email" type="email"  placeholder="Email:" name="email" class="select-box form-control input-w" autocomplete="email">
             <label for='email'></label>
+            <span id="emailcheck" class="emailcheck d-none"role="alert">
+                   <p class="text-danger">** Invalid email format</p>                     
+            </span>
+            <span id="emailcheck_null" class="emailcheck_null d-none"role="alert">
+                   <p class="text-danger">** This field is required</p>                     
+            </span>
             <div class="row px-4">
               <button type="button" class="next-btn btn btn-primary mt-4 px-5 py-2 rounded-pill"
                 onclick="onNext4Click()">NEXT</button>
@@ -155,9 +162,6 @@
                                
                                 <label class="ms-4 my-2">Confirm Password:</label>
           <input id="password_confirmation" type="Password" placeholder="password confirmation" name="password_confirmation" class="select-box" required  autocomplete="new-password">
-          <span class="text-danger" role="alert">
-                               
-          </span>
             <div class="row px-4">
               <button type="submit" class="next-btn btn btn-primary mt-4 px-5 py-2 rounded-pill"
                 >FINALIZE ACCOUNT</button>
@@ -245,18 +249,19 @@
       </div>
     </section>
 
- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=datingapp&key=AIzaSyAcUA3BsiMTEW3safCIqH5JHMEN1jMT17Y"></script>
-
+ <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyDkeNNsdK4dt7Zr-q5sScHnp8ZE5FrhAmI"></script>
 
 <script>
-
 var searchInput = 'search_input';
 
 $(document).ready(function () {
-    var autocomplete;
-    autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
-        types: ['geocode'],
-    });
+  var autocomplete;
+autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
+    types: ['geocode'],
+    componentRestrictions: {
+        country: "KE"
+    }
+});
 	
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
         var near_place = autocomplete.getPlace();
@@ -267,21 +272,13 @@ $(document).ready(function () {
         document.getElementById('longitude_view').innerHTML = near_place.geometry.location.lng();
     });
 });
-
 $(document).on('change', '#'+searchInput, function () {
     document.getElementById('latitude_input').value = '';
     document.getElementById('longitude_input').value = '';
 	
     document.getElementById('latitude_view').innerHTML = '';
     document.getElementById('longitude_view').innerHTML = '';
-});
+})
 
-var autocomplete;
-autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
-    types: ['geocode'],
-    componentRestrictions: {
-        country: "USA"
-    }
-});
 </script>
 @endsection

@@ -6,6 +6,7 @@ use App\Models\browse;
 use App\Models\User;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Auth;
 
 
 class BrowseController extends Controller
@@ -20,10 +21,15 @@ class BrowseController extends Controller
         $this->middleware('auth');
     }
     public function index()
-    { 
-  
+    {   
+
+       
+
+       
+
         return view('/pages/browse', [
-            'users' =>User::paginate(10)            
+            'users' =>User::where('sex', Auth::user()->sex)->paginate(10)     
+
     ]);
 
     }

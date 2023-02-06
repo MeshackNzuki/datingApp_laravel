@@ -1,17 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container " style="padding:32px">
     <div class="row justify-content-center">
         <div class="col-md-6 ">
-            <div class="card shadow border-0">
+            <div class="card shadow-lg border">
                 <div class="card-header ">   <h4 class="text-center fw-bold mb-5">Log in</h2></div>
-
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                
+                        @csrf                
                         <div class="emailBox row px-4 py-2">
                                 <input id="email" type="email" class="@error('email') is-invalid @enderror text-center" placeholder="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 

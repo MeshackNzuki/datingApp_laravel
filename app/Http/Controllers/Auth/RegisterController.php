@@ -71,6 +71,8 @@ class RegisterController extends Controller
     {      
 
         try {
+           
+        
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -79,22 +81,20 @@ class RegisterController extends Controller
                 'age' => $request->age,
                 'password' => Hash::make($request->password),
             ]);
-        } catch (\Throwable $th) {
-            Alert::error('', 'Could Not Create Account');
-            return  redirect('/signup');
-        }
-        
+
        
 
         auth()->login($user);
 
         subscription::create(["user_id"=>auth()->user()->id,"status"=>"inactive"]);
 
-        Alert::success('', 'your account has been set up, Welcome');
+        Alert::success('', 'Your account has been set up, Welcome');
 
-
-
-        return view("pages/payment");
+        return route("/onboard");
+        } catch (\Throwable $th) {
+            Alert::error('', 'This Email is already in use, Use a different email');
+            return back();
+        }
     }
 }
  

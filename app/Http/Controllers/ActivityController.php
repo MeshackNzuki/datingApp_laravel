@@ -49,20 +49,20 @@ class ActivityController extends Controller
     {       
          try {
            // $from_id = requests::where('to_user_id',$request->user()->id)->get('from_user_id');
-             $users = $request->user()->friends;
-            // dd($users);
-             $matches  = $request->user()->pendingFriends;                 
+             $matches = $request->user()->friends;
+             $users = $request->user()->pendingFriendsTo;
+            
+            // $matches  = $request->user()->pendingFriends;                 
              return view('/pages/activity', [
-             'users' =>  $users,
-             'matches' => $matches             
+             'matches' => $matches,
+             'users' =>   $users          
         ]);
     
          } catch (\Throwable $th) {
             return view('/pages/activity', [
             'users' =>null,
             'matches' => null               
-        ]);
-    
+        ]);    
          }  
     }
 

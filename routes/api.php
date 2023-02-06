@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('/transactionresponse',[App\Http\Controllers\Mpesa\MpesaResponseController::class, 'response'])->name('transactionresponse');
+Route::get('/register_url',[App\Http\Controllers\Mpesa\MpesaRegisterUrlController::class, 'index'])->name('register_url');
+Route::get('/confirmation_url',[App\Http\Controllers\Mpesa\MpesaConfirmationController::class, 'index'])->name('confirmation_url');
+Route::get('/validation_url',[App\Http\Controllers\Mpesa\MpesaValidationController::class, 'index'])->name('validation_url');

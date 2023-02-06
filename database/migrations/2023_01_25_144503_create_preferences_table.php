@@ -32,7 +32,8 @@ return new class extends Migration
             $table->string('ass')->nullable();
             $table->string('petite')->nullable();
             $table->string('big_boobs')->nullable();
-            $table->string('age_bracket')->nullable();
+            $table->string('min-age')->nullable();
+            $table->string('max-age')->nullable();
             $table->string('description')->nullable();
             $table->string('contact')->nullable();
             $table->timestamps();

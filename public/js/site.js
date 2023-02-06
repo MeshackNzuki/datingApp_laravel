@@ -1,5 +1,7 @@
 /***** /// landing page js ////*/
 
+
+
 const signinPopupBox = document.getElementsByClassName("signinPopupBox")[0]; // Get element of signupBox
 const crossMark = document.getElementsByClassName("crossMark")[0]; // Get signup cross
 
@@ -28,10 +30,9 @@ const onforgotPasswordClick = () => {
   forgotPasswordContent.classList.remove("d-none");
 };
 
-
 /***** /// sign up js ////*/
 
-const form = document.getElementsByClassName("form")[0];
+ const form = document.getElementsByClassName("form")[0];
 const form2 = document.getElementsByClassName("form2")[0];
 const form3 = document.getElementsByClassName("form3")[0];
 const form4 = document.getElementsByClassName("form4")[0];
@@ -39,25 +40,86 @@ const form5 = document.getElementsByClassName("form5")[0];
 
 
 // Clicking next button on step 1
-const onNext1Click = () => {
+const onNext1Click = (e) => {
+
+
+  const  sexcheck_null = document.getElementsByClassName("sexcheck_null")[0];
+
+  let sexValue = $("#sex").val();
+  if(sexValue.length == ""){   
+  sexcheck_null.classList = "sexcheck_null d-inline invalid-feedback text-center";
+  return 0;
+  }
+
   form.classList = "d-none";
   form2.classList = "d-block";
+
 };
 
 // Clicking next button on step 2
 const onNext2Click = () => {
+     const  agecheck_null = document.getElementsByClassName("agecheck_null")[0];
+     const  agecheck = document.getElementsByClassName("agecheck")[0];
+
+    let ageValue = $("#age").val();
+    if(ageValue.length == ""){   
+    agecheck_null.classList = "agecheck_null d-inline invalid-feedback text-center";
+    return 0;
+    }
+   else if (ageValue < 18) {
+      agecheck_null.classList = "d-none";     
+      agecheck.classList = " d-inline invalid-feedback text-center";
+      console.log('problem in if block')
+      ageError = false;
+      return 0;
+    } else {
+     
+    }
+
   form2.classList = "d-none";
   form3.classList = "d-block";
 };
 
 // Clicking next button on step 3
 const onNext3Click = () => {
+  /*
+  const  locationcheck_null = document.getElementsByClassName("locationcheck_null")[0];
+  let locationValue = $("#location").val();
+  console.log($("#location").val())
+  if(locationValue.length == ""){   
+  locationcheck_null.classList = "locationcheck_null d-inline invalid-feedback text-center";
+  return 0;
+  }
+  */
   form3.classList = "d-none";
   form4.classList = "d-block";
 };
 
+
 // Clicking next button on step 4
 const onNext4Click = () => {
+
+  const  emailcheck_null = document.getElementsByClassName("emailcheck_null")[0];
+  const  emailcheck_format = document.getElementsByClassName("emailcheck_format")[0];
+  const  emailcheck = document.getElementsByClassName("emailcheck")[0];
+
+  let regex = /^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/;
+
+ let emailValue = $("#email").val();
+ if(emailValue.length == ""){   
+ emailcheck_null.classList = "emailcheck_null d-inline invalid-feedback text-center";
+ return 0;
+ }
+ 
+ else if (!emailValue.match(regex)) {
+  emailcheck_null.classList = "d-none";     
+  emailcheck.classList = " d-inline invalid-feedback text-center";
+  return 
+}
+ else {
+  
+ }
+
   form4.classList = "d-none";
   form5.classList = "d-block";
 };
@@ -128,9 +190,6 @@ loader.classList.add("d-none");
 //register form validation
 
 $(document).ready(function () {
-
-
-
   $("#signup-form").validate({
     highlight: function(element, errorClass, validClass) {
       $(element).addClass(errorClass).removeClass(validClass);
@@ -144,12 +203,7 @@ $(document).ready(function () {
     },
 
     rules: {     
-      name: "required",
-   
-      email: {
-        required: true,
-        email: true
-      },
+      
       jpassword:{
         required: true,
         minlength:2
@@ -158,43 +212,13 @@ $(document).ready(function () {
         required: true,
         equalTo:'#password'
       },
-      sex:{
-        required: true,
-      },
-      age:{
-        required: true,
-      },
-      location:{
-        required: true,
-      },
-
     },
     messages: {
-      name: "Please specify your name",
-      email: {
-        required: "We need your email address to contact you",
-        email: "Your email address must be in the format of name@domain.com"
-      },
-        password: {
-        required: " Please enter a password",
-        minlength: "Pasword length must be greater than 2"
-      },
+     
      password_confirmation: {
-        required: "We need your email address to contact you",
         equalTo: "Your Passwords dont match"
       },
-      age: {
-        required: "We need your email address to contact you",
-        email: "Your email address must be in the format of name@domain.com"
-      },  
-       jsex: {
-        required: "Please tell us what you are looking for in step 1",
-      
-      },
-      location: {
-        required: "Please Give your location for easy hookup",
-        
-      }
+     
     }
 ,
     
@@ -215,38 +239,6 @@ $(document).ready(function () {
       }}
 
 
-
-
-
   });
-
-  $("#signup-form").on('submit', function(e) {
-    var isvalid = $("#signup-form").valid();
-
-  
-    if($('#age').val() < 17)
-    {
-      e.preventDefault();
-      alert("We don't recomment underage individuals (Below 18 Yrs)");
-      window.location.reload();
-   }
-
-    
-
-});
-
-
   
 })
-
-
-function validate(e) {
-  e.preventDefault();
-  
-// Storing Field Values In Variables
-var monthly = document.getElementById("monthly").value;
-var weekly = document.getElementById("weekly").value;
-var phone = document.getElementById("phone").value;
-console.log('executed')
-alert(phone)
-}

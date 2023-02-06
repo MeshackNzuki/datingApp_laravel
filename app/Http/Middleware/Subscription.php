@@ -6,6 +6,7 @@ use Closure;
 use App\Models\subscription as subscriptions;
 use Illuminate\Http\Request;
 use Alert;
+use Carbon\Carbon;
 class Subscription
 {
     /**
@@ -19,15 +20,26 @@ class Subscription
     {
 
 
-         $status = subscriptions::where("user_id", auth()->user()->id)->first('status')->status;     
-    
+         $status = subscriptions::where("user_id", auth()->user()->id)->first('status')->status;
+         $ends_on = subscriptions::where("user_id", auth()->user()->id)->first('ends_on')->ends_on; 
 
-        if ($status === "active")
+         //simulate dates
+         $now = Carbon::now();
+         //$ends_on =  $now->subDays(1);
+         
+        if($now->gte($ends_on)){
+          subscriptions::where("user_id", auth()->user()->id)->update(["status" => "inactive"]);
+          Alert::info('','Your subscription expired on '.$ends_on." Please pay to continue enjoying our services");
+          return redirect('/payment');
+        }
+
+
+        if ($status === "active" )
         {
             return $next($request);
         }
         else{      
-            Alert::info('','This Account is not activated, please choose a package and Pay to activate')   ;
+            Alert::info('','This Account is not activated, please choose a package and pay to activate');
             return redirect('/payment');
         }
         

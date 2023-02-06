@@ -6,51 +6,83 @@ use Illuminate\Http\Request;
 use App\Models\mpesa;
 use App\Models\subscription;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
+use Alert;
 
 
 class MpesaResponseController extends Controller
 {     
 public function response(Request $request){
-$stkArray = $request->Body;
+    
+     
+   $response =$request->getContent();
+	 $response = json_decode($response ,true);
+   try {
+          $Item = $response['Body']['stkCallback']['CallbackMetadata']['Item'];
 
-$merchantRequestID = $stkArray['stkCallback']['MerchantRequestID'];
-$checkoutRequestID = $stkArray['stkCallback']['CheckoutRequestID'];
+          $metadata = array(
+            'MerchantRequestID' => $response['Body']['stkCallback']['MerchantRequestID'],
+            'CheckoutRequestID' => $response['Body']['stkCallback']['CheckoutRequestID'],
+            'ResultCode' => $response['Body']['stkCallback']['ResultCode'],
+            'ResultDesc' => $response['Body']['stkCallback']['ResultDesc'],
+          );
 
-//get amount
+          $mpesaData = array_column($Item, 'Value', 'Name');
+          $mpesaData = array_merge($metadata, $mpesaData);
 
-$metadata=$stkArray['stkCallback']['CallbackMetadata'];
-$amount = array_values($metadata['Item'][0]);
-
-//get transaction id
-$transaction_id = array_values($metadata['Item'][1]);
-
-//get transaction phone
-$phone= array_values($metadata['Item'][4]);
+            
 
 
-if($amount)
-{
-  mpesa::where('merchantRequestID',$merchantRequestID)->update([
-    'phone' => $phone[1],
-    'mpesa_transaction_id' => $transaction_id[1],
-    'amount' => $amount[1],
-    'status'=>'completed',
-  ]);
-  
-   $user_id = mpesa::where('merchantRequestID',$merchantRequestID)->first("user_id")->user_id;
-  
-   subscription::where('user_id',$user_id)->update([
-    'status' => 'active',
-    'details'=>'completed via mpesa',
-  ]);
-  return redirection('/browse');
+            mpesa::where('merchantRequestID',$mpesaData['MerchantRequestID'])->update([
+                'phone' => $mpesaData['PhoneNumber'],
+                'transactionID' => $mpesaData['MpesaReceiptNumber'],
+                'amount' => $mpesaData['MerchantRequestID'],
+                'status'=>'completed',
+              ]);
 
-}
+            // Write subcription
+            $start_date = Carbon::now();
 
-mpesa::where('merchantRequestID',$merchantRequestID)->update([
-  'status'=>'failed',
-]);
+            $end_date_weekly = $start_date->add(7, 'day');
+            $end_date_monthly = $start_date->add(30, 'day');
+              
 
+            if($mpesaData['Amount'] == 1){
+                  
+                $user_id = mpesa::where('merchantRequestID',$mpesaData['MerchantRequestID'])->first("user_id")->user_id;
+
+                subscription::where('user_id',$user_id)->update([
+                  'status' => 'active',
+                  'type'   => 'weekly',
+                  'starts_on' =>$start_date,
+                  'starts_on' =>$end_date_monthly,
+                  'description'=>$mpesaData['ResultDesc'],
+                ]);
+              
+              return back()->with('success', 'Your payment has been received, Good luck on getting laid. You can Now browse matches');
+
+              }
+          
+             if($mpesaData['Amount'] == 2) 
+              {
+                $user_id = mpesa::where('merchantRequestID',$mpesaData['MerchantRequestID'])->first("user_id")->user_id;
+
+                subscription::where('user_id',$user_id)->update([
+                  'status' => 'active',
+                  'type'   => 'monthly',
+                  'starts_on' =>$start_date,
+                  'starts_on' =>$end_date_monthly,
+                  'description'=>$mpesaData['ResultDesc'],
+                ]);
+                    return back()->with('success', 'Your payment has been received, Good luck on getting laid. You can Now    browse matches');
+                }
+   } catch (\Throwable $th) { 
+      
+             mpesa::where('merchantRequestID',$mpesaData['MerchantRequestID'])->update([
+            'status'=>'failed',
+              ]);
+            return back()->with('error', 'Could not process Mpesa Payment request. Please try again later');
+   }     
 
     }  
        

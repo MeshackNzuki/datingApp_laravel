@@ -23,6 +23,7 @@ class preferences extends Model
         'ass',
         'petite',
         'big_boobs',
-        'age_bracket',
+        'min-age',
+        'max-age',
    ];
 }

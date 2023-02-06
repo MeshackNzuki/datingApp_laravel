@@ -10,29 +10,161 @@ const step9 = document.querySelector(".field-9");
 const step10 = document.querySelector(".field-10");
 const finalStep = document.querySelector(".final-step");
 
+
+
+// sleep time expects milliseconds
+function sleep(time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+$(document).ready(function () {
+  $("#spinner").hide();
+});
+
+
+
 const onStep1Click = () => {
   step1.style.display = "none";
   step2.style.display = "flex";
 };
 
 const onStep2Click = () => {
+
+
   step2.style.display = "none";
   step3.style.display = "flex";
 };
 
 const onStep3Click = () => {
+
+  const prefcheck = document.getElementsByClassName("prefcheck")[0];
+
+  function error() {
+    prefcheck.classList = "prefcheck d-inline invalid-feedback text-center";
+    return 0;
+  }
+
+
+
+
+
+  let input1 = $("#wit")
+  let input2 = $("#intelligence")
+  let input3 = $("#goodlooks")
+  let input4 = $("#humor")
+  let input5 = $("#bedroom_skills")
+  let input6 = $("#boldness")
+  let input7 = $("#money")
+  let input8 = $("#petite")
+  let input9 = $("#ass")
+  let input10 = $("#big_boobs")
+  let input11 = $("#power")
+  let input12 = $("#flirtatiousness")
+  let input13 = $("#endowment")
+
+
+  if ($(input1).is(':checked')) {
+    console.log("is checked")
+  }
+
+  else if ($(input2).is(':checked')) {
+    console.log("is checked")
+  }
+  else if ($(input3).is(':checked')) {
+    console.log("is checked")
+  }
+  else if ($(input4).is(':checked')) {
+    console.log("is checked")
+  }
+  else if ($(input5).is(':checked')) {
+    console.log("is checked")
+  }
+  else if ($(input6).is(':checked')) {
+    console.log("is checked")
+  }
+  else if ($(input7).is(':checked')) {
+    console.log("is checked")
+  }
+  else if ($(input8).is(':checked')) {
+    console.log("is checked")
+  }
+  else if ($(input9).is(':checked')) {
+    console.log("is checked")
+  }
+  else if ($(input10).is(':checked')) {
+    console.log("is checked")
+  }
+  else if ($(input11).is(':checked')) {
+    console.log("is checked")
+  }
+  else if ($(input12).is(':checked')) {
+    console.log("is checked")
+  }
+  else if ($(input13).is(':checked')) {
+    console.log("is checked")
+  }
+  else {
+    console.log("no selection")
+    return error()
+  }
   step3.style.display = "none";
   step4.style.display = "flex";
 };
 
 const onStep4Click = () => {
+  let subValue = $("#description").val();
+  if (subValue.length == "") {
+    subcheck.classList = "subcheck d-inline invalid-feedback text-center";
+    return 0;
+  }
+
+
   step4.style.display = "none";
   step5.style.display = "flex";
 };
 
+
 const onStep5Click = () => {
-  step5.style.display = "none";
-  finalStep.style.display = "flex";
+
+
+  let contactValue = $("#contact").val();
+
+  if (contactValue.length == "") {
+    contactcheck.classList = "contactcheck d-inline invalid-feedback text-center";
+    return;
+  }
+
+
+  $("#spinner").show();
+
+  // Usage!
+  sleep(3000).then(() => {
+    $("#spinner").hide();
+    step5.style.display = "none";
+    finalStep.style.display = "flex";
+  });
+
+
+
+  let count = 10;
+  let interval = setInterval(function () {
+
+    count -= 1;
+
+    if (count === 0) {
+      clearInterval(interval);
+      $("#spinner").show();
+      sleep(2000).then(() => {
+        $("#spinner").hide();
+      });
+      $("form").submit();
+    }
+
+    document.getElementById("#counter").innerHTML = count
+
+  }, 1000);
+
+
 };
 
 //

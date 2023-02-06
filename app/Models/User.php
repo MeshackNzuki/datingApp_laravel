@@ -12,6 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\profile;
 use App\Models\media;
+use Cache;
 
 class User extends Authenticatable
 {
@@ -25,7 +26,10 @@ class User extends Authenticatable
      * 
      */
 
- 
+     public function isOnline()
+     {
+         return Cache::has('user-is-online-' . $this->id);
+     }
 
      public function profile()  
      {  
@@ -74,13 +78,9 @@ public function acceptedFriendsFrom()
     public function friends() {
         return $this->mergedRelationWithModel(User::class, 'friends_view');
 }
-
-
     public function pendingFriends() {
         return $this->mergedRelationWithModel(User::class, 'friends_view_requests');
     }
-
-
     protected $fillable = [
         'name',
         'email',

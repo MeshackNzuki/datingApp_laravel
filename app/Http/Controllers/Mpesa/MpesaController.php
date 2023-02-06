@@ -8,6 +8,7 @@ use App\Models\mpesa;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
+use Exception;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class MpesaController extends Controller
@@ -27,11 +28,9 @@ public function getAccessToken(){
        throw new Exception(curl_error($req), curl_errno($req));
    }
 
-   dd($curl_response);
   $access_token=json_decode($curl_response);
   $access_token=$access_token->access_token;
   return $access_token;
-
 }
 
 
@@ -50,12 +49,13 @@ public function transact(Request $request){
    "Timestamp"=>$time_stamp,    
    
    "TransactionType"=> "CustomerPayBillOnline",       
-   "Amount"=>$request->amount,    
+   //"Amount"=>$request->amount,    
+   "Amount"=>'1',    
    "PartyA"=>"254".substr($request->phone, -9),   
-   "PartyB"=>"4029613", 
+   "PartyB"=>"4089491", 
 
    "PhoneNumber"=>"254".substr($request->phone, -9),
-   "CallBackURL"=>"https://bb6d-102-7-193-106.in.ngrok.io/transactionresponse",  
+   "CallBackURL"=>"https://78f5-102-2-236-146.in.ngrok.io/api/transactionresponse",
    "AccountReference"=>"LuckyMate Entertainment",    
    "TransactionDesc"=>"LuckyMate Entertainment"
     );
@@ -64,22 +64,19 @@ public function transact(Request $request){
     $body= json_encode($data);
     $trans=curl_init("https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest");
 
-
     curl_setopt($trans, CURLOPT_HTTPHEADER, array('Content-Type:application/json', 'Authorization:Bearer ' . $access_token));
     curl_setopt($trans, CURLOPT_POSTFIELDS, $body);
     curl_setopt($trans, CURLOPT_RETURNTRANSFER, true);
-
-
-    $trans=json_decode(curl_exec($trans));  
-    //dd($trans);
+    $trans=json_decode(curl_exec($trans)); //dd($trans);
 
    try {
    $id = $request->user()->id; 
-            mpesa::create(['user_id'=>$id,'type'=>'Mpesa','merchantRequestID'=>$trans->MerchantRequestID,'status'=>'pending']);
-   Alert::success('',"We have send mpesa prompt to your handset on ". $request->phone. " for account LuckyMateEnroll, please input pin.");
-    return redirect('/browse');
+   mpesa::create(['user_id'=>$id,'type'=>'Mpesa','merchantRequestID'=>$trans->MerchantRequestID,'status'=>'pending']);
+   Alert::success('',"We have send Mpesa PIN prompt to your handset on ". $request->phone. " for account LuckyMateEntertainment, please input PIN.");
+    return redirect('/payment');
    } catch (\Throwable $th) {
-   Alert::error('',"Could not process request");
+   Alert::error('',"Could not process your request");
+   return back();
    }
 
     }    

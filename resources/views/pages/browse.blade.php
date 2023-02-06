@@ -4,11 +4,30 @@
     <!-- Section Another Page -->
     <div class="section-another-page">
       <div class="container">
+      @if (session('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+         @endif
+         @if (session('error'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ session('error') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+
+       
+
+
+         @endif
         <div class="row">
-          <div class="list-group">
-            
+          <div class="list-group">           
 
             @foreach ($users as $user)
+ 
+              @if($user->id == Auth::user()->id)
+                @continue;
+              @endif
                          
             <label class="list-group-item" for="CheckBox5">
               <div class="row">
@@ -17,12 +36,19 @@
                                <img src="./imgs/icon-user.png" alt="" />
                              @else
 
-                               <img class="rounded-circle circle-img shadow-4-strong" src="./avatars/{{$user->avatar}}">
-                            @endif
-                             </div>
+                                <img class="rounded-circle circle-img shadow-4-strong" src="./avatars/{{$user->avatar}}">
+                              @endif
+                              </div>
 
                 <div class="col col-9 text-desc">
-                  <strong> {{ $user->name }}</strong> <br />
+      
+                  <strong> {{ $user->name }}
+                  @if($user->isOnline())             
+                  <small class="fa fa-circle text-success"></small>
+                  @else
+                
+                  @endif
+                 </strong> <br />
                   {{ $user->location}}
 
                   <br />
@@ -31,10 +57,10 @@
 
                 </div>
 
-                <div class="col col-2 text-right">
+                <div class="col col-2 text-right"> joined
                 {{ date('M , Y', strtotime($user->created_at)) }} <br />
 
-                
+                      
                   <form method="POST" action="{{ route('request-hookup',$user->id) }}">
   
                         @csrf

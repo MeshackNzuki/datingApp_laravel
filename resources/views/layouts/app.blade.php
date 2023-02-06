@@ -38,15 +38,15 @@
 
 <body>
     <div id="app">
-        
+
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand navlinks" href="{{ url('/') }}">
-                <span class="sitename fs-4  ">Luckymate.co.ke</span>
-                
-               </a>
-               
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+            <div class="container">          
+                    
+                    <div class="">
+                        <a href = "/"><img src="imgs/logo.png" alt="lucky mate logo" class = "img-fluid" style="height:60px"></a>
+                    </div>
+
+                <button class="navbar-toggler  border-0 " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -84,36 +84,45 @@
                             @endif
 
                             @if (Route::has('register'))
-                                <li class="nav-item">
+                                <li class="nav-item d-none d-sm-block">
                                 <div class="login-box">
                                 <a href="/signup" role="button" class="login-btn btn btn-outline-info rounded-pill px-4 ">Sign Up</a>
                                    
                                 </div>
                                 </li>
                             @endif
-                            @else  
-                            <li class="nav-item">
-                                <div class="login-box">
-                                <a href="/settings" role="button" class=" btn nav-link"><i class="fa fa-cog" aria-hidden="true">{{'_'}}</i>Settings </a>
-                                   
-                                </div>
-                                </li>                          
-                             <li class="nav-item">
+                            @else                                                 
+                                @if(Auth::user()->avatar)
+                                <img
+                                    src="./avatars/{{Auth::user()->avatar}}"
+                                    class="img-fluid rounded-circle"
+                                    style="height: 40px; width: 40px"
+                                    alt=""
+                                    />
+                                 @endif   
+                             <li class="nav-item">       
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-                                
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    {{ Auth::user()->name }}</a>
+
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="">
+                                        <li><a class="dropdown-item" href="/settings"><i class=""></i><i class="fa fa-user" style="color:purple"></i> Profile</a></li>
+                                        <li>
+                                        <a class="dropdown-item " href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                      <i class="fa fa-sign-out" style="color:purple"></i> {{ __('Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
-                                </div>
+                                    
+                                    </li>
+                                    </ul>   
+
+                 
+
+                                
                             </li>
                                @endguest
                     </ul>
@@ -122,113 +131,15 @@
         </nav>
 
         <main class="py-4">
-                   <!-- Sign in popup box -->
-      
+                   <!-- Sign in popup box -->      
             @yield('content')
-        </main>
-    </div>
-    
-    <footer>
-        <div class="container">
+            <footer>
+        <div class="container text-cnter">
             <hr>
-            <div class="footer-content text-secondary ps-3 pb-3">&#169; luckymate.co.ke {{date("Y")}} | All rights reserved.     <a class=" text-secondary ps-3 pb-3 me-32" href="/terms"> Terms </a>
-            </div>
+            <div class="footer-content text-secondary ps-3 pb-3">&#169; luckymate.co.ke 2022 | All rights reserved.<a href="/terms" class=" footer-content text-secondary ps-3 pb-3 me-auto">Our terms</a></div>
         </div>
     </footer>
-    <script src="js/site.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
-</body>
-<div class="container signinPopupBox py-5 position-fixed top-0 left-0 d-none">
-            <div class="row">
-                <!-- Login Form -->
-                
-                <div class="signinPopup col-lg-4 col-8 col-sm-6 mx-auto pb-5 pt-4 rounded-4 position-relative">
-                    <h4 class="text-center fw-bold mb-5">Log in</h2>
-                        <div class="crossMark">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
-                                class="cross-svg bi bi-x text-secondary" viewBox="0 0 16 16">
-                                <path
-                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                            </svg>
-                        </div>
-                        <div class=" signin-content">
-                            <form method="POST" action="{{ route('login') }}">
-                            @csrf
-                    
-               
-                            <div class="emailBox row px-4 py-2">
-                                <input id="email" type="email" class="@error('email') is-invalid @enderror text-center" placeholder="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        
-                            <div class="passwordBox row px-4 py-2">
-                                <input id="password" placeholder="Password" class="text-center" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                           </div>
-                            <div class="joinNow d-flex flex flex-direction-row justify-content-between px-3 py-2">
-                                <a href = "/signup" class="link-anchor text-center">Join free</a>
-                            
-                                    @if (Route::has('password.request'))
-                                    <a class="link-anchor text-center" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                            <div class="row px-4">
-                                <button  type="submit" 
-                                    class="main-btn btn btn-primary mt-4 px-5 py-2 rounded-pill"> {{ __('Login') }}</button>
-                            </div>
-                            </form>
-                        </div>
-
-                        <!-- Forgot Password 
-                        <div class="forgotPasswordContent d-none">
-                            <h6 class="text-secondary px-5 text-center pb-4">Enter your email address and we
-                                will send you further
-                                instructions</h6>
-                            <div class="emailBox row px-4 py-2">
-                                <input type="email" placeholder="Email" class="text-center">
-                            </div>
-
-                            <div class="row px-4">
-                                <button type="button"
-                                    class="main-btn btn btn-primary mt-4 px-5 py-2 rounded-pill">RESET PASSWORD</button>
-                            </div>
-                        </div>
-                        -->
-                </div>
-
-
-            </div>
-            @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
-        </div> 
-        
-</html>
-     <script src="js/site.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
+        </main>
+        @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+        <html>
+        <script src="js/site.js"></script>
