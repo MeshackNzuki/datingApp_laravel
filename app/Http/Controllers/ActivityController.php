@@ -50,7 +50,7 @@ class ActivityController extends Controller
          try {
            // $from_id = requests::where('to_user_id',$request->user()->id)->get('from_user_id');
              $matches = $request->user()->friends;
-             $users = $request->user()->pendingFriendsTo;
+             $users = $request->user()->pendingFriendsTo;            
             
             // $matches  = $request->user()->pendingFriends;                 
              return view('/pages/activity', [

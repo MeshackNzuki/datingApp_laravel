@@ -28,18 +28,20 @@
                 href="#"
                 class="matchedme active border px-3 py-1 rounded-start-2 border-dark fw-bold text-decoration-none"
                 onclick="onMatchedmeClick()"
-                >Matched me
+                >Matched me ({{Auth::user()->pendingFriendsTo->count()}})
               </a>
               <a
                 href="#"
                 class="matches border px-3 py-1 rounded-end-2 border-dark fw-bold text-decoration-none"
                 onclick="onMatchesClick()"
               >
-                Matches
+                Matches ({{ Auth::user()->friends->count()}})
               </a>
             </div>
           </div>
 
+             
+         
           <!-- Content Under Matched me box -->
           <!-- card row box -->
           <div class="row matchedme-box" id="matchedmeBox">
@@ -145,7 +147,7 @@
           <div class="list-group">
    
             @if ($matches)
-                                           
+                                       
             @foreach ($matches as $user)
 
                          <label class="list-group-item" for="CheckBox5">

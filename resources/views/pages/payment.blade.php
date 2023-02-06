@@ -34,7 +34,8 @@
 
             <div class="subscription-section">
               <h1>Select Your Subscription:</h1>
-              <form method="POST" action="{{ route('transact') }}" onsubmit="validate()">
+
+              <form method="POST"  id="form"  action="{{ route('transact') }}">
                         @csrf   
               <div class="list-group">
                 <input                
@@ -85,7 +86,7 @@
 
             <div class="form-section">
           
-                <div class="row">
+                <div class="row m-2">
                   <div class="mb-3">
                     <label for="InputNumber" class="form-label"
                       >Mpesa Number</label
@@ -101,8 +102,8 @@
                   </div>
                 </div>
 
-                <div class="row main-btn-wrapper">
-                  <button onclick="validate()"class="main-btn btn btn-primary">
+                <div class="row main-btn-wrapper m-3">
+                  <button type="submit" class="main-btn btn btn-primary">
                     Pay Now
                   </button>
                 </div>
@@ -116,9 +117,20 @@
     <script type="text/javascript">
         $("form").on("submit", function (e) {
             e.preventDefault();
+            var phone = $("#InputNumber1").val();
+
+            var phonenoreg = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+
+            if ((phone.match(phonenoreg))) {
+
+              document.getElementById("form").submit();
+            }
+            else {
+              alert("Phone Number is invalid");
+              return 0;
+            }
         });
     </script>
-
 @endsection
 
 

@@ -44,9 +44,9 @@
       
                   <strong> {{ $user->name }}
                   @if($user->isOnline())             
-                  <small class="fa fa-circle text-success"></small>
+                  <small class="fa fa-circle text-"></small>
                   @else
-                
+                  <small>...</small>   
                   @endif
                  </strong> <br />
                   {{ $user->location}}
