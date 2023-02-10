@@ -66,6 +66,10 @@ const onNext2Click = () => {
     agecheck_null.classList = "agecheck_null d-inline invalid-feedback text-center";
     return 0;
     }
+    else if(ageValue.length > 2){   
+      agecheck.classList = " d-inline invalid-feedback text-center";
+      return 0;
+      }
    else if (ageValue < 18) {
       agecheck_null.classList = "d-none";     
       agecheck.classList = " d-inline invalid-feedback text-center";
@@ -182,9 +186,14 @@ const onProfileClick = () => {
 
 //loader
 
-window.addEventListener("load", (event) => {
-let loader = document.getElementById('loader')
-loader.classList.add("d-none");
+
+document.addEventListener("readystatechange", (event) => {
+  if (event.target.readyState === "interactive") {
+ 
+  } else if (event.target.readyState === "complete") {
+    let loader = document.getElementById('loader')
+    loader.classList.add("d-none");
+  }
 });
 
 //register form validation

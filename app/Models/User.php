@@ -36,6 +36,12 @@ class User extends Authenticatable
        return $this->hasOne('App\Models\profile');  
      }  
 
+     public function subscription()  
+     {  
+       return $this->hasOne('App\Models\subscription');  
+     }  
+
+
      public function media()  
      {  
        return $this->hasOne('App\Models\media');  
@@ -89,6 +95,8 @@ public function acceptedFriendsFrom()
         'age',
         'password',
         'avatar',
+        'last_login',
+        'status_fake_user',
     ];
 
     /**

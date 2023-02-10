@@ -18,7 +18,7 @@ class HookController extends Controller
           'status' => "pending"
           ]);
 
-          return back()->with('success', 'Request Sent check matched tab for accepted requests');
+          return back()->with('success', 'Request Sent check Activity tab to see accepted requests');
           }
 
       else{}

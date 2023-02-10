@@ -16,7 +16,7 @@ class Subscription
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)    {
+    public function handle(Request $request, Closure $next){
 
 
          $status = subscriptions::where("user_id", auth()->user()->id)->first('status')->status;
@@ -26,10 +26,9 @@ class Subscription
          //$ends_on =  $now->subDays(1);         
         if($now->gte($ends_on)){
           subscriptions::where("user_id", auth()->user()->id)->update(["status" => "inactive"]);
-          Alert::info('','Your subscription expired on '.$ends_on." Please pay to continue enjoying our services");
+          Alert::info('','Your subscription expired on '.$ends_on." Please pay to continue enjoying this service");
           return redirect('/payment');
         }
-
 
         if ($status === "active" )
         {

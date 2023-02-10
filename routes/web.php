@@ -34,6 +34,11 @@ Route::get('/' ,function(){
     return view('welcome');
 });
 
+Route::get('/ld' ,function(){
+    return view('pages/landing');
+});
+
+
 Route::middleware(['auth'])->group(function () {
 //payments
 Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'index'])->name('payment');
@@ -63,3 +68,20 @@ Route::middleware(['auth','onboarded','subscription'])->group(function () {
     //browse
     Route::get('/browse', [App\Http\Controllers\BrowseController::class, 'index'])->name('browse');
 });
+
+
+
+//Admin
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+    Route::get('/login_get', [App\Http\Controllers\Admin\AdminAuthController::class, 'getLogin'])->name('login_get');
+    Route::post('/login_post', [App\Http\Controllers\Admin\AdminAuthController::class, 'postLogin'])->name('login_post');
+    Route::post('/logout_post', [App\Http\Controllers\Admin\AdminAuthController::class, 'logout'])->name('logout_admin');
+ 
+    Route::group(['middleware' => 'adminauth'], function () {
+        Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('admin');
+        Route::get('/users', [App\Http\Controllers\DashboardController::class, 'users'])->name('users');
+ 
+    });
+});
+

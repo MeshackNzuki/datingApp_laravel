@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\browse;
 use App\Models\User;
+use App\Models\requests;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Auth;
@@ -21,16 +22,27 @@ class BrowseController extends Controller
         $this->middleware('auth');
     }
     public function index()
-    {   
+    {       
 
-       
-
-       
+       //$test = requests::where('from_user_id','1')->where('to_user_id','3')->first();
+       //dd($test);
+         $users = null;
+         $auth = Auth::user()->sex;
+         //dd($auth);
+         if(Auth::user()->sex === "1"){
+            $users = User::where('sex', Auth::user()->sex)->orWhere('sex',"2")->paginate(10); 
+         }
+         if(Auth::user()-> sex ==="2"){
+            $users = User::where('sex', Auth::user()->sex)->orWhere('sex',"1")->paginate(10); 
+         }
+         if(Auth::user()-> sex ==="2" || Auth::user()-> sex ==="4")
+         {
+            $users = User::where('sex', Auth::user()->sex)->paginate(10) ;
+         }
 
         return view('/pages/browse', [
-            'users' =>User::where('sex', Auth::user()->sex)->paginate(10)     
-
-    ]);
+            'users' => $users  
+                 ]);
 
     }
 

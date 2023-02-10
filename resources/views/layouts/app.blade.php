@@ -32,7 +32,17 @@
   crossorigin="anonymous"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
-    
+   
+  
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRNHYRBL1S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRNHYRBL1S');
+</script>
 
 </head>
 
@@ -105,7 +115,7 @@
                                  @endif   
                              <li class="nav-item">       
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}</a>
+                                    {{ Auth::user()->name}}</a>
 
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="">
                                         <li><a class="dropdown-item" href="/settings"><i class=""></i><i class="fa fa-user" style="color:purple"></i> Profile</a></li>
@@ -121,11 +131,7 @@
                                     </form>
                                     
                                     </li>
-                                    </ul>   
-
-                 
-
-                                
+                                    </ul>                 
                             </li>
                                @endguest
                     </ul>
@@ -137,9 +143,10 @@
                    <!-- Sign in popup box -->      
             @yield('content')
             <footer>
-        <div class="container text-cnter">
+        <div class="container text-center">
             <hr>
-            <div class="footer-content text-secondary ps-3 pb-3">&#169; luckymate.co.ke 2022 | All rights reserved.<a href="/terms" class=" footer-content text-secondary ps-3 pb-3 me-auto">Our terms</a></div>
+         <div><a href="/about" class=" footer-content text-secondary ps-3 pb-3 me-auto">About</a><a href="/trems" class=" footer-content text-secondary ps-3 pb-3 me-auto">Our terms</a> <a href="/contacts" class=" footer-content text-secondary ps-3 pb-3 me-auto">Contact Us</a></div>
+            <div class="footer-content text-secondary ps-3 pb-3">&#169; luckymate.co.ke 2022 | All rights reserved.</div>
         </div>
     </footer>
         </main>

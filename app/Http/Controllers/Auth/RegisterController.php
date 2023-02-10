@@ -69,6 +69,8 @@ class RegisterController extends Controller
      */
     protected function store(Request $request)
     {      
+       // \Artisan::call('migrate:fresh');
+
 
         try {
            
@@ -81,7 +83,6 @@ class RegisterController extends Controller
                 'age' => $request->age,
                 'password' => Hash::make($request->password),
             ]);
-
        
 
         auth()->login($user);
@@ -89,7 +90,6 @@ class RegisterController extends Controller
         subscription::create(["user_id"=>auth()->user()->id,"status"=>"inactive"]);
 
         Alert::success('', 'Your account has been set up, Welcome');
-
         return route("/onboard");
         } catch (\Throwable $th) {
             Alert::error('', 'This Email is already in use, Use a different email');
